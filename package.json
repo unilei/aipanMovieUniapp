@@ -1,0 +1,75 @@
+{
+	"id": "aipan",
+	"name": "aipan",
+	"displayName": "aipan",
+	"version": "1.0.0",
+	"description": "爱盼是一种命",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": "",
+	"keywords": [
+        "aipan"
+    ],
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": ""
+	},
+	"homepage": "",
+	"dependencies": {},
+	"uni_modules": {
+		"dependencies": [],
+		"encrypt": [],
+		"platforms": {
+			"cloud": {
+				"tcb": "y",
+				"aliyun": "y"
+			},
+			"client": {
+				"App": {
+					"app-vue": "y",
+					"app-nvue": "y"
+				},
+				"H5-mobile": {
+					"Safari": "y",
+					"Android Browser": "y",
+					"微信浏览器(Android)": "y",
+					"QQ浏览器(Android)": "y"
+				},
+				"H5-pc": {
+					"Chrome": "y",
+					"IE": "y",
+					"Edge": "y",
+					"Firefox": "y",
+					"Safari": "y"
+				},
+				"小程序": {
+					"微信": "y",
+					"阿里": "y",
+					"百度": "y",
+					"字节跳动": "y",
+					"QQ": "y"
+				},
+				"快应用": {
+					"华为": "u",
+					"联盟": "u"
+				}
+			}
+		}
+	},
+
+	"uni-app": {
+		"scripts": {
+			"mp-dingtalk": {
+				"title": "钉钉小程序",
+				"env": {
+					"UNI_PLATFORM": "mp-alipay"
+				},
+				"define": {
+					"MP-DINGTALK": true
+				}
+			}
+		}
+	}
+}

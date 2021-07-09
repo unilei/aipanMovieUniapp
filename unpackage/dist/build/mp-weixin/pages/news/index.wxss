@@ -1,0 +1,1 @@
+page{background-color:#fff}.shi-container{padding:20rpx}.shi-img{width:98%;margin:0 auto}.shi-img image{width:100%}.shi-title{font-size:34rpx;font-weight:700;text-align:center}.shi-author{font-size:28rpx;text-align:center;color:grey}.shi-content{text-align:center;font-size:30rpx}.my-container{padding:20rpx;color:#888;border-top:1rpx solid #eee}

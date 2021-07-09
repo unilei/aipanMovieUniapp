@@ -1,0 +1,11 @@
+
+.totop {
+	position: fixed;
+	z-index: 999999;
+	color: #fff;
+	width: 100rpx;
+	height: 100rpx;
+	bottom:calc(0px + 20px);
+	right: 40rpx;
+}
+

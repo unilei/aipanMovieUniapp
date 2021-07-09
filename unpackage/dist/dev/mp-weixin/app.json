@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/news/index",
+    "pages/vod/detail"
+  ],
+  "subPackages": [],
+  "window": {
+    "pageOrientation": "portrait",
+    "navigationBarTitleText": "AiPan",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F8F8F8",
+    "backgroundColorTop": "#F4F5F6",
+    "backgroundColorBottom": "#F4F5F6"
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#0aa0a8",
+    "borderStyle": "black",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home-fill.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/news/index",
+        "iconPath": "static/me.png",
+        "selectedIconPath": "static/me-fill.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "演示定位能力"
+    }
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

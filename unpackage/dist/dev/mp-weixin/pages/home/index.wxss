@@ -1,0 +1,64 @@
+
+.vod-type-container {
+	margin-top: 10rpx;
+}
+.vod-search-container{
+	background-color: #FFFFFF;
+	margin-top: 10rpx;
+}
+.vod-container {
+	width: 98%;
+	margin: 20rpx auto;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+}
+.vod-item {
+	width: 45%;
+	margin: 10rpx auto;
+	background-color: #FFFFFF;
+	padding: 20rpx 10rpx;
+	border-radius: 20rpx;
+}
+.vod-img {
+	width: 100%;
+}
+.vod-img image {
+	width: 100%;
+	border-radius: 20rpx;
+}
+.vod-remarks {
+	color: #000000;
+	text-align: center;
+	font-size: 24rpx;
+	text-decoration: underline;
+}
+.vod-name {
+	font-size: 24rpx;
+	color: #808080;
+	font-weight: 700;
+	width: 100%;
+	text-align: center;
+}
+.totop {
+	position: fixed;
+	z-index: 999999;
+	color: #fff;
+	width: 100rpx;
+	height: 100rpx;
+	bottom:calc(0px + 20px);
+	right: 40rpx;
+}
+
