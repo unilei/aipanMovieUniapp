@@ -18,7 +18,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "视频列表",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
             
         },

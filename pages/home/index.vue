@@ -164,7 +164,8 @@
 			vodSearch(e){
 				console.log(e)
 				this.vodDetailList = [];
-				this.getVodDetailList(this.page, this.typeId, e.value)
+				this.page = 1;
+				this.getVodDetailList(this.page,'', e.value)
 			},
 			turnVodDetail(vodId) {
 				uni.navigateTo({
@@ -174,6 +175,7 @@
 			vodTypeChange(e) {
 				console.log(e)
 				this.vodDetailList = [];
+				this.page = 1;
 				this.typeId = e.currentItem.type_id;
 				this.getVodDetailList(this.page, e.currentItem.type_id, this.vodName);
 
@@ -181,6 +183,11 @@
 			vodTypeListShow(e) {
 				console.log(e)
 			}
+		},
+		onPullDownRefresh() {
+			this.vodDetailList = [];
+			this.page = 1;
+			this.getVodDetailList(this.page, this.typeId , this.vodName);
 		},
 		onReachBottom() {
 			console.log('bottom')

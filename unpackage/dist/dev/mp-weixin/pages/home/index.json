@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "视频列表",
-  "enablePullDownRefresh": false,
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
     "vgt-tab": "/components/vgt-tab/vgt-tab"
