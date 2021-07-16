@@ -2,7 +2,7 @@
 .vod-type-container {
 	margin-top: 10rpx;
 }
-.vod-search-container {
+.vod-search-container{
 	background-color: #FFFFFF;
 	margin-top: 10rpx;
 }
@@ -58,48 +58,7 @@
 	color: #fff;
 	width: 100rpx;
 	height: 100rpx;
-	bottom: calc(0px + 20px);
+	bottom:calc(0px + 20px);
 	right: 40rpx;
-}
-.swiper{
-	height: 520rpx;
-}
-.banner-item{
-	display: -webkit-box;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	        flex-direction: row;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	        align-items: center;
-	-webkit-box-pack: center;
-	-webkit-justify-content: center;
-	        justify-content: center;
-	background-color:	#004956;
-}
-.banner-l{
-	width: 50%;
-}
-.banner-l image{
-	width: 100%;
-}
-.banner-r{
-	width: 50%;
-}
-.banner-r-1{
-	font-size: 40rpx;
-	color: #FFFFFF;
-	text-align: center;
-	font-weight: 700;
-}
-.banner-r-2{
-	font-size: 34rpx;
-	color: #FFFFFF;
-	text-align: center;
-	font-weight: 700;
-	text-decoration:underline;
 }
 

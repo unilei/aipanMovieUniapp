@@ -2,12 +2,13 @@
   "pages": [
     "pages/home/index",
     "pages/news/index",
-    "pages/vod/detail"
+    "pages/vod/detail",
+    "pages/vod/list"
   ],
   "subPackages": [],
   "window": {
     "pageOrientation": "portrait",
-    "navigationBarTitleText": "AiPan",
+    "navigationBarTitleText": "爱盼影视",
     "navigationBarTextStyle": "black",
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#F8F8F8",
@@ -27,6 +28,12 @@
         "text": "首页"
       },
       {
+        "pagePath": "pages/vod/list",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home-fill.png",
+        "text": "视频"
+      },
+      {
         "pagePath": "pages/news/index",
         "iconPath": "static/me.png",
         "selectedIconPath": "static/me-fill.png",
@@ -39,6 +46,5 @@
       "desc": "演示定位能力"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

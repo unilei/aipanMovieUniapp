@@ -1,27 +1,14 @@
 <template>
 	<view>
-		<view class="vod-banner-container">
-			<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="500">
-				<swiper-item v-for="(item,index) in vodBannerData" :key="index">
-					<view class="swiper-item banner-item" @click="turnVodDetail(item.vod_id)">
-						<view class="banner-l"><image :src="item.vod_pic" mode="widthFix"></image></view>
-						<view class="banner-r">
-							<view class="banner-r-1">{{item.vod_name}}</view>
-							<view class="banner-r-2">{{item.vod_remarks}}</view>
-						</view>
-					</view>
-				</swiper-item>
-			</swiper>
-		</view>
 		<view class="vod-search-container">
 			<uni-search-bar :radius="100" @confirm="vodSearch" v-model="searchVodValue"></uni-search-bar>
 		</view>
-
+		
 		<view class="vod-type-container">
 			<vgt-tab :list="list" :itemStyleDefault="itemStyleDefault" :itemStyleActive="itemStyleActive"
 				@onValueChange="vodTypeChange" @onListShow="vodTypeListShow"></vgt-tab>
 		</view>
-
+		
 		<view v-if="vodDetailList.length>0">
 			<view class="vod-container">
 				<view class="vod-item" v-for="(vod,index) in vodDetailList" :key="index"
@@ -38,8 +25,7 @@
 		</view>
 		<view v-else>
 			<view class="vod-container">
-				<view class="vod-item" v-for="(vod,index) in vodDetailTestList" :key="index"
-					@click="turnVodDetail(vod.vod_id)">
+				<view class="vod-item" v-for="(vod,index) in vodDetailTestList" :key="index" @click="turnVodDetail(vod.vod_id)">
 					<view class="vod-img">
 						<image :src="vod.vod_pic" mode="widthFix"></image>
 					</view>
@@ -50,7 +36,7 @@
 				</view>
 			</view>
 		</view>
-
+		
 		<view>
 			<image class="totop" @click="toTop" src="@/static/totop.png" mode="widthFix"></image>
 		</view>
@@ -83,22 +69,20 @@
 				lastPage: 0,
 				typeId: 0,
 				vodName: '',
-				vodDetailTestList: vodData.data,
-				searchVodValue: '',
-				vodBannerData: []
+				vodDetailTestList:vodData.data,
+				searchVodValue:'',
 
 			}
 		},
 		onLoad() {
-
+			
 			this.getVodList(this.page);
 			this.getVodDetailList(this.page, this.typeId, this.vodName);
-			this.getVodBannerlList(1)
 		},
 		methods: {
-			toTop() {
+			toTop(){
 				uni.pageScrollTo({
-					scrollTop: 0
+					scrollTop:0
 				})
 			},
 			// t=>type_id 类型 | ids=>vod_id | h=>vod_time | wd=>vod_name | from=>vod_play_from
@@ -177,28 +161,11 @@
 					console.log(err)
 				})
 			},
-			getVodBannerlList(level) {
-				var data = {
-					ac: 'detail',
-					pg: 1,
-					level: level
-				}
-				vodApi.vodList(data).then(res => {
-					console.log(res)
-					if (res.code == 1) {
-						this.vodBannerData = res.list;
-					} else {
-						console.log('vod list error:' + JSON.stringify(res.msg))
-					}
-				}).catch(err => {
-					console.log(err)
-				})
-			},
-			vodSearch(e) {
+			vodSearch(e){
 				console.log(e)
 				this.vodDetailList = [];
 				this.page = 1;
-				this.getVodDetailList(this.page, '', e.value)
+				this.getVodDetailList(this.page,'', e.value)
 			},
 			turnVodDetail(vodId) {
 				uni.navigateTo({
@@ -220,7 +187,7 @@
 		onPullDownRefresh() {
 			this.vodDetailList = [];
 			this.page = 1;
-			this.getVodDetailList(this.page, this.typeId, this.vodName);
+			this.getVodDetailList(this.page, this.typeId , this.vodName);
 		},
 		onReachBottom() {
 			console.log('bottom')
@@ -240,8 +207,7 @@
 	.vod-type-container {
 		margin-top: 10rpx;
 	}
-
-	.vod-search-container {
+	.vod-search-container{
 		background-color: #FFFFFF;
 		margin-top: 10rpx;
 	}
@@ -287,46 +253,14 @@
 		width: 100%;
 		text-align: center;
 	}
-
+	
 	.totop {
 		position: fixed;
 		z-index: 999999;
 		color: #fff;
 		width: 100rpx;
 		height: 100rpx;
-		bottom: calc(var(--window-bottom) + 20px);
+		bottom:calc(var(--window-bottom) + 20px);
 		right: 40rpx;
-	}
-	.swiper{
-		height: 520rpx;
-	}
-	.banner-item{
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
-		background-color:	#004956;
-	}
-	.banner-l{
-		width: 50%;
-	}
-	.banner-l image{
-		width: 100%;
-	}
-	.banner-r{
-		width: 50%;
-	}
-	.banner-r-1{
-		font-size: 40rpx;
-		color: #FFFFFF;
-		text-align: center;
-		font-weight: 700;
-	}
-	.banner-r-2{
-		font-size: 34rpx;
-		color: #FFFFFF;
-		text-align: center;
-		font-weight: 700;
-		text-decoration:underline;
 	}
 </style>
