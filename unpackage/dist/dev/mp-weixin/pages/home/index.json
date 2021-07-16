@@ -1,8 +1,5 @@
 {
   "navigationBarTitleText": "首页",
   "enablePullDownRefresh": true,
-  "usingComponents": {
-    "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
-    "vgt-tab": "/components/vgt-tab/vgt-tab"
-  }
+  "usingComponents": {}
 }

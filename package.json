@@ -9,8 +9,8 @@
 	},
 	"repository": "",
 	"keywords": [
-        "aipan"
-    ],
+		"aipan"
+	],
 	"author": "",
 	"license": "MIT",
 	"bugs": {
@@ -58,7 +58,6 @@
 			}
 		}
 	},
-
 	"uni-app": {
 		"scripts": {
 			"mp-dingtalk": {

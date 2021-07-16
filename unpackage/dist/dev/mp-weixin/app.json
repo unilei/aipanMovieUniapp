@@ -29,8 +29,8 @@
       },
       {
         "pagePath": "pages/vod/list",
-        "iconPath": "static/home.png",
-        "selectedIconPath": "static/home-fill.png",
+        "iconPath": "static/video.png",
+        "selectedIconPath": "static/video-fill.png",
         "text": "视频"
       },
       {
