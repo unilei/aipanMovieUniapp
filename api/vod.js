@@ -7,7 +7,15 @@ function vodList(data){
 		data:data
 	})
 }
+function indexVodList(data){
+	return request({
+		method:"GET",
+		url:'provide/indexVod/',
+		data:data
+	})
+}
 
 export default{
-	vodList
+	vodList,
+	indexVodList
 }

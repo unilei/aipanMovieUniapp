@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<view class="vod-banner-container">
-			<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="500" circular>
+		<view class="vod-banner-container" v-if="vodBannerData.length>0">
+			<swiper class="swiper" :indicator-dots="false" :autoplay="true" :interval="3000" :duration="500" circular previous-margin="20" next-margin="20">
 				<swiper-item v-for="(item,index) in vodBannerData" :key="index">
 					<view class="swiper-item banner-item" @click="turnVodDetail(item.vod_id)">
 						<view class="banner-l"><image :src="item.vod_pic" mode="widthFix"></image></view>
@@ -13,12 +13,32 @@
 				</swiper-item>
 			</swiper>
 		</view>
+		<view v-else class="vod-banner-container" >
+			<swiper class="swiper" :indicator-dots="false" :autoplay="true" :interval="3000" :duration="500" circular previous-margin="20" next-margin="20">
+				<swiper-item v-for="(item,index) in vodDetailTestList" :key="index">
+					<view class="swiper-item banner-item" @click="turnVodDetail(item.vod_id)">
+						<view class="banner-l"><image :src="item.vod_pic" mode="widthFix"></image></view>
+						<view class="banner-r">
+							<view class="banner-r-1">{{item.vod_name}}</view>
+							<view class="banner-r-2">{{item.vod_remarks}}</view>
+						</view>
+					</view>
+				</swiper-item>
+			</swiper>
+		</view>
 		
+		<view class="vod-notice-bar">
+			<uni-notice-bar v-if="vodBannerData.length>0" showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#ffffff" color="#000000" text="爱盼影视,资源全部来源于网络,所有资源完全免费,如有问题请联系:xuliulei666@163.com !!!"></uni-notice-bar>
+			<uni-notice-bar v-else showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#ffffff" color="#000000" text="爱盼影视"></uni-notice-bar>
+		</view>
 		
-		<view v-if="vodDongZuoDyData.length>0">
+		<view v-if="vodIndexData.length>0">
 			<view class="vod-container">
-				<view class="vod-title">动作电影推荐</view>
-				<view class="vod-item" v-for="(vod,index) in vodDongZuoDyData" :key="index"
+				<view class="vod-t">
+					<view class="vod-title">最近更新</view>
+					<view class="vod-more" @click="turnMoreVod()">更多</view>
+				</view>
+				<view class="vod-item" v-for="(vod,index) in vodIndexData" :key="index"
 					@click="turnVodDetail(vod.vod_id)">
 					<view class="vod-img">
 						<image :src="vod.vod_pic" mode="widthFix"></image>
@@ -71,14 +91,16 @@
 				vodDetailTestList: vodData.data,
 				
 				vodBannerData: [],
-				vodDongZuoDyData:[],
+				vodIndexData:[],
 
 			}
 		},
 		onLoad() {
-			// 获取最近半个月的动作电影
-			this.getVodDongZuoDyList(this.page, 6, '','',24*15);
+			
 			this.getVodBannerlList(1)
+			// 获取最新一天的视频
+			this.getIndexVodList(this.page, '', '','',24*1);
+			
 		},
 		methods: {
 			toTop() {
@@ -86,8 +108,13 @@
 					scrollTop: 0
 				})
 			},
+			turnMoreVod(){
+				uni.switchTab({
+					url:'/pages/vod/list'
+				})
+			},
 			// t=>type_id 类型 | ids=>vod_id | h=>vod_time | wd=>vod_name | from=>vod_play_from
-			getVodDongZuoDyList(page, t, wd, ids, h, from) {
+			getIndexVodList(page, t, wd, ids, h, from) {
 				var data = {
 					ac: 'detail',
 					pg: page
@@ -111,8 +138,8 @@
 					console.log(res)
 					if (res.code == 1) {
 						this.lastPage = res.pagecount;
-						let vodDongZuoDyData = this.vodDongZuoDyData;
-						this.vodDongZuoDyData = vodDongZuoDyData.concat(res.list);
+						let vodIndexData = this.vodIndexData;
+						this.vodIndexData = vodIndexData.concat(res.list);
 
 					} else {
 						console.log('vod list error:' + JSON.stringify(res.msg))
@@ -138,38 +165,24 @@
 					console.log(err)
 				})
 			},
-			vodSearch(e) {
-				console.log(e)
-				this.vodDetailList = [];
-				this.page = 1;
-				this.getVodDetailList(this.page, '', e.value)
-			},
 			turnVodDetail(vodId) {
 				uni.navigateTo({
 					url: '/pages/vod/detail?vod_id=' + vodId
 				})
-			},
-			vodTypeChange(e) {
-				console.log(e)
-				this.vodDetailList = [];
-				this.page = 1;
-				this.typeId = e.currentItem.type_id;
-				this.getVodDetailList(this.page, e.currentItem.type_id, this.vodName);
-
 			},
 			vodTypeListShow(e) {
 				console.log(e)
 			}
 		},
 		onPullDownRefresh() {
-			this.vodDetailList = [];
+			this.vodIndexData = [];
 			this.page = 1;
-			// this.getVodDetailList(this.page, this.typeId, this.vodName);
+			this.getIndexVodList(this.page, '', '','',24*1);
 		},
 		onReachBottom() {
 			console.log('bottom')
 			this.page++;
-			// this.getVodDetailList(this.page, this.typeId, this.vodName);
+			this.getIndexVodList(this.page, '', '','',24*1);
 		},
 		onShareAppMessage() {
 
@@ -191,21 +204,34 @@
 	}
 
 	.vod-container {
-		width: 98%;
+		width: 100%;
 		margin: 20rpx auto;
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
+		background-color: #FFFFFF;
 	}
-	.vod-title{
+	
+	.vod-t{
 		width: 98%;
 		margin: 0 auto;
-		font-size: 30rpx;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
 		padding: 10rpx 20rpx;
-		font-weight: 700;
-		border-bottom: 1rpx solid #000000;
+		border-bottom: 1rpx solid #808080;
+		
+	}
+	.vod-title{
+		font-size: 24rpx;
+		
+	}
+	.vod-more{
+		font-size: 30rpx;
+		color: #808080;
 	}
 	.vod-item {
 		width: 20%;
@@ -213,6 +239,7 @@
 		background-color: #FFFFFF;
 		padding: 20rpx 10rpx;
 		border-radius: 20rpx;
+		border: 1rpx solid #EEEEEE;
 	}
 
 	.vod-img {
@@ -252,10 +279,16 @@
 		bottom: calc(var(--window-bottom) + 20px);
 		right: 40rpx;
 	}
+	.vod-banner-container{
+		
+	}
 	.swiper{
-		height: 520rpx;
+		height:350rpx;
 	}
 	.banner-item{
+		width: 98%;
+		height:350rpx;
+		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -263,7 +296,7 @@
 		background-color:	#004956;
 	}
 	.banner-l{
-		width: 50%;
+		width: 40%;
 	}
 	.banner-l image{
 		width: 100%;
@@ -283,5 +316,9 @@
 		text-align: center;
 		font-weight: 700;
 		text-decoration:underline;
+	}
+	
+	.vod-notice-bar{
+		margin-top: 20rpx;
 	}
 </style>

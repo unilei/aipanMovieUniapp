@@ -2060,9 +2060,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 12:
-/*!************************************************!*\
-  !*** E:/workplace/aipan-uniapp/store/index.js ***!
-  \************************************************/
+/*!*****************************************!*\
+  !*** E:/workplace/aipan/store/index.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9037,9 +9037,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 22:
-/*!********************************************!*\
-  !*** E:/workplace/aipan-uniapp/api/vod.js ***!
-  \********************************************/
+/*!*************************************!*\
+  !*** E:/workplace/aipan/api/vod.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9052,17 +9052,25 @@ function vodList(data) {
     url: 'provide/vod/',
     data: data });
 
+}
+function indexVodList(data) {
+  return (0, _request.default)({
+    method: "GET",
+    url: 'provide/indexVod/',
+    data: data });
+
 }var _default =
 
 {
-  vodList: vodList };exports.default = _default;
+  vodList: vodList,
+  indexVodList: indexVodList };exports.default = _default;
 
 /***/ }),
 
 /***/ 23:
-/*!************************************************!*\
-  !*** E:/workplace/aipan-uniapp/api/request.js ***!
-  \************************************************/
+/*!*****************************************!*\
+  !*** E:/workplace/aipan/api/request.js ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9104,9 +9112,9 @@ request;exports.default = _default;
 /***/ }),
 
 /***/ 24:
-/*!***************************************************!*\
-  !*** E:/workplace/aipan-uniapp/common/vodData.js ***!
-  \***************************************************/
+/*!********************************************!*\
+  !*** E:/workplace/aipan/common/vodData.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9574,9 +9582,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 4:
-/*!********************************************!*\
-  !*** E:/workplace/aipan-uniapp/pages.json ***!
-  \********************************************/
+/*!*************************************!*\
+  !*** E:/workplace/aipan/pages.json ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9585,9 +9593,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 70:
-/*!*************************************************************************************!*\
-  !*** E:/workplace/aipan-uniapp/uni_modules/uni-icons/components/uni-icons/icons.js ***!
-  \*************************************************************************************/
+/*!******************************************************************************!*\
+  !*** E:/workplace/aipan/uni_modules/uni-icons/components/uni-icons/icons.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

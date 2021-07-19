@@ -7,7 +7,7 @@
 	margin-top: 10rpx;
 }
 .vod-container {
-	width: 98%;
+	width: 100%;
 	margin: 20rpx auto;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -24,14 +24,33 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
+	background-color: #FFFFFF;
 }
-.vod-title{
+.vod-t{
 	width: 98%;
 	margin: 0 auto;
-	font-size: 30rpx;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
 	padding: 10rpx 20rpx;
-	font-weight: 700;
-	border-bottom: 1rpx solid #000000;
+	border-bottom: 1rpx solid #808080;
+}
+.vod-title{
+	font-size: 24rpx;
+}
+.vod-more{
+	font-size: 30rpx;
+	color: #808080;
 }
 .vod-item {
 	width: 20%;
@@ -39,6 +58,7 @@
 	background-color: #FFFFFF;
 	padding: 20rpx 10rpx;
 	border-radius: 20rpx;
+	border: 1rpx solid #EEEEEE;
 }
 .vod-img {
 	width: 100%;
@@ -73,10 +93,15 @@
 	bottom: calc(0px + 20px);
 	right: 40rpx;
 }
+.vod-banner-container{
+}
 .swiper{
-	height: 520rpx;
+	height:350rpx;
 }
 .banner-item{
+	width: 98%;
+	height:350rpx;
+	margin: 0 auto;
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -93,7 +118,7 @@
 	background-color:	#004956;
 }
 .banner-l{
-	width: 50%;
+	width: 40%;
 }
 .banner-l image{
 	width: 100%;
@@ -113,5 +138,8 @@
 	text-align: center;
 	font-weight: 700;
 	text-decoration:underline;
+}
+.vod-notice-bar{
+	margin-top: 20rpx;
 }
 
