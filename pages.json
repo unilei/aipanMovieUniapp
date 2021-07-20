@@ -31,7 +31,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/vod/vod",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTitleText": "爱盼影视",

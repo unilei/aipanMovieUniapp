@@ -3,7 +3,8 @@
     "pages/home/index",
     "pages/news/index",
     "pages/vod/detail",
-    "pages/vod/list"
+    "pages/vod/list",
+    "pages/vod/vod"
   ],
   "subPackages": [],
   "window": {

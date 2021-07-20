@@ -97,26 +97,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l1 = !_vm.showTest
-    ? _vm.__map(_vm.vodPlayUrlData, function(item, index) {
-        var $orig = _vm.__get_orig(item)
+  var l1 = _vm.__map(_vm.vodPlayUrlData, function(item, index) {
+    var $orig = _vm.__get_orig(item)
 
-        var l0 = _vm.__map(item, function(vod, key) {
-          var $orig = _vm.__get_orig(vod)
+    var l0 = _vm.__map(item, function(vod, key) {
+      var $orig = _vm.__get_orig(vod)
 
-          var g0 = _vm.myNowVodData.indexOf(vod[1])
-          return {
-            $orig: $orig,
-            g0: g0
-          }
-        })
+      var g0 = _vm.myNowVodData.indexOf(vod[1])
+      return {
+        $orig: $orig,
+        g0: g0
+      }
+    })
 
-        return {
-          $orig: $orig,
-          l0: l0
-        }
-      })
-    : null
+    return {
+      $orig: $orig,
+      l0: l0
+    }
+  })
+
   _vm.$mp.data = Object.assign(
     {},
     {
@@ -195,23 +194,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _vod = _interopRequireDefault(__webpack_require__(/*! @/api/vod.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -248,24 +230,29 @@ var _vod = _interopRequireDefault(__webpack_require__(/*! @/api/vod.js */ 22));f
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = { data: function data() {return { vodData: [], vodId: 0, page: 1, vodPlayUrlData: [], videoSrc: '', myVodHistoryData: [], myNowVodData: [], showTest: false };}, onLoad: function onLoad(option) {this.vodId = option.vod_id;this.getVodDetailList(this.page, '', '', option.vod_id, '', '');var myVodHistoryStr = uni.getStorageSync('myVodHistory');if (myVodHistoryStr) {this.myVodHistoryData = JSON.parse(myVodHistoryStr);}}, methods: { getVodDetailList: function getVodDetailList(page, t, wd, ids, h, from) {var _this = this;var data = { ac: 'detail', pg: page };if (t) {data.t = t;}if (ids) {data.ids = ids;}if (h) {data.h = h;}if (wd) {data.wd = wd;}if (from) {data.from = from;}_vod.default.vodList(data).then(function (res) {console.log(res);if (res == '域名未授权') {_this.showTest = true;}if (res.code == 1) {var vodPlayUrl = res.list[0].vod_play_url;_this.vodData = res.list[0]; // console.log(vodPlayUrl)
+var _default = { data: function data() {return { vodData: [], vodId: 0, page: 1, vodPlayUrlData: [], videoSrc: '', myVodHistoryData: [], myNowVodData: [], showTest: false };}, onLoad: function onLoad(option) {this.vodId = option.vod_id;this.getVodDetailList(this.page, '', '', option.vod_id, '', ''); // let myVodHistoryStr = uni.getStorageSync('myVodHistory');
+    // if (myVodHistoryStr) {
+    // 	this.myVodHistoryData = JSON.parse(myVodHistoryStr);
+    // }
+  }, methods: { turnVod: function turnVod() {uni.navigateTo({ url: './vod' });}, getVodDetailList: function getVodDetailList(page, t, wd, ids, h, from) {var _this = this;var data = { ac: 'detail', pg: page };if (t) {data.t = t;}if (ids) {data.ids = ids;}
+      if (h) {
+        data.h = h;
+      }
+      if (wd) {
+        data.wd = wd;
+      }
+      if (from) {
+        data.from = from;
+      }
+      _vod.default.vodList(data).then(function (res) {
+        console.log(res);
+        if (res == '域名未授权') {
+          _this.showTest = true;
+        }
+        if (res.code == 1) {
+          var vodPlayUrl = res.list[0].vod_play_url;
+          _this.vodData = res.list[0];
+          // console.log(vodPlayUrl)
           var vodData = [];
           var a = vodPlayUrl.split('$$$');
           a.forEach(function (item, index) {
@@ -291,20 +278,16 @@ var _default = { data: function data() {return { vodData: [], vodId: 0, page: 1,
     playVideoUrl: function playVideoUrl(vod) {
       var vodUrl = vod[1];
       this.videoSrc = vodUrl;
-      var myVodHistory = JSON.parse(uni.getStorageSync('myVodHistory'));
-      var data = myVodHistory ? myVodHistory : [];
-      data.push(vodUrl);
+      var obj = {
+        isLei: 1,
+        url: vodUrl };
 
-      var myNowVodData = this.myNowVodData;
-      var myNowVodIndex = myNowVodData.indexOf(vodUrl);
-
-      if (myNowVodIndex == -1) {
-        this.myNowVodData.push(vodUrl);
-      } else {
-        this.myNowVodData.splice(myNowVodIndex, 1);
-      }
-      // console.log(this.myNowVodData)
-      uni.setStorageSync('myVodHistory', JSON.stringify(data));
+      console.log(vodUrl);
+      uni.setClipboardData({
+        data: JSON.stringify(obj),
+        success: function success() {
+          console.log('success');
+        } });
 
     } },
 

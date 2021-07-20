@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uniSearchBar: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar */ "uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue */ 51))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar */ "uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue */ 64))
     },
     vgtTab: function() {
-      return Promise.all(/*! import() | components/vgt-tab/vgt-tab */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vgt-tab/vgt-tab")]).then(__webpack_require__.bind(null, /*! @/components/vgt-tab/vgt-tab.vue */ 58))
+      return Promise.all(/*! import() | components/vgt-tab/vgt-tab */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vgt-tab/vgt-tab")]).then(__webpack_require__.bind(null, /*! @/components/vgt-tab/vgt-tab.vue */ 71))
     }
   }
 } catch (e) {
@@ -249,7 +249,7 @@ var _vodData = _interopRequireDefault(__webpack_require__(/*! @/common/vodData.j
 //
 //
 //
-var vgtTab = function vgtTab() {Promise.all(/*! require.ensure | components/vgt-tab/vgt-tab */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vgt-tab/vgt-tab")]).then((function () {return resolve(__webpack_require__(/*! @/components/vgt-tab/vgt-tab.vue */ 58));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { 'vgt-tab': vgtTab }, data: function data() {return { itemStyleDefault: { color: '#808080', background: '#f4f5f6' }, itemStyleActive: { color: '#000000', 'border': '1rpx solid #000000;' }, list: [], vodList: [], vodDetailList: [], page: 1, lastPage: 0, typeId: 0, vodName: '', vodDetailTestList: _vodData.default.data, searchVodValue: '' };}, onLoad: function onLoad() {this.getVodList(this.page);this.getVodDetailList(this.page, this.typeId, this.vodName);}, methods: { toTop: function toTop() {uni.pageScrollTo({ scrollTop: 0 });}, // t=>type_id 类型 | ids=>vod_id | h=>vod_time | wd=>vod_name | from=>vod_play_from
+var vgtTab = function vgtTab() {Promise.all(/*! require.ensure | components/vgt-tab/vgt-tab */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vgt-tab/vgt-tab")]).then((function () {return resolve(__webpack_require__(/*! @/components/vgt-tab/vgt-tab.vue */ 71));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { 'vgt-tab': vgtTab }, data: function data() {return { itemStyleDefault: { color: '#808080', background: '#f4f5f6' }, itemStyleActive: { color: '#000000', 'border': '1rpx solid #000000;' }, list: [], vodList: [], vodDetailList: [], page: 1, lastPage: 0, typeId: 0, vodName: '', vodDetailTestList: _vodData.default.data, searchVodValue: '' };}, onLoad: function onLoad() {this.getVodList(this.page);this.getVodDetailList(this.page, this.typeId, this.vodName);}, methods: { toTop: function toTop() {uni.pageScrollTo({ scrollTop: 0 });}, // t=>type_id 类型 | ids=>vod_id | h=>vod_time | wd=>vod_name | from=>vod_play_from
     getVodList: function getVodList(page, t, ids, h, wd, from) {var _this = this;var data = { ac: 'list', pg: page };if (t) {data.t = t;
       }
       if (ids) {

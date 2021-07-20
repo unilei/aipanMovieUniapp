@@ -19,8 +19,14 @@
           "scene": null
         },
         {
-          "name": "pages/news/index",
-          "pathName": "pages/news/index",
+          "name": "pages/vod/detail",
+          "pathName": "pages/vod/detail",
+          "query": "vod_id=53587",
+          "scene": null
+        },
+        {
+          "name": "pages/vod/vod",
+          "pathName": "pages/vod/vod",
           "query": "",
           "scene": null
         }

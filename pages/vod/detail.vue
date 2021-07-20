@@ -1,53 +1,36 @@
 <template>
 	<view class="vod-container">
-
-		<view v-if="!showTest">
-			<view class="vod-video">
-				<video :src="videoSrc" controls autoplay page-gesture play-btn-position="center"
-					enable-play-gesture></video>
+		<view class="vod-t">
+			<view class="vod-t-l" @click="turnVod()">
+				<image :src="vodData.vod_pic" mode="widthFix"></image>
 			</view>
-			<view class="vod-intro-tags">
-				<view class="vod-intro-tag">{{vodData.vod_name}}</view>
-				<view class="vod-intro-tag">{{vodData.type_name}}</view>
-				<view class="vod-intro-tag">{{vodData.vod_area}}</view>
-			</view>
-			<view class="play-url-container">
-				<view class="play-url" v-for="(item,index) in vodPlayUrlData" :key="index">
-					<view class="play-source-name" v-if="index==0">在线播放1</view>
-					<view class="play-source-name" v-if="index==1">在线播放2</view>
-					<view class="play-url-item" v-for="(vod,key) in item" :key="key" @click="playVideoUrl(vod)"
-						:class=" myNowVodData.indexOf(vod[1]) == -1 ? '' : 'active'  ">
-						{{vod[0]}}
-					</view>
-
-				</view>
-			</view>
-			<view class="vod-intro">
-				<view class="vod-intro-blurb">
-					<text>{{vodData.vod_blurb}}</text>
-				</view>
+			<view class="vod-t-r">
+				<view class="vod-name">{{vodData.vod_name}}</view>
+				<view class="vod-type-name">{{vodData.type_name}}</view>
+				<view class="vod-area">{{vodData.vod_area}}</view>
+				
+				<view class="vod-director">{{vodData.vod_director}}</view>
+				<view class="vod-db-score">豆瓣：{{vodData.vod_douban_score}}</view>
+				<view class="vod-pubdate">{{vodData.vod_pubdate}}</view>
+				<view class="vod_remarks">{{vodData.vod_remarks}}</view>
 			</view>
 		</view>
-		<view v-if="showTest">
-			<view class="vod-video">
-				<image src="../../static/2973.jpg" mode="widthFix"></image>
-			</view>
-			<view class="vod-intro-tags">
-				<view class="vod-intro-tag">出塞</view>
-				<view class="vod-intro-tag">王昌龄</view>
-				<view class="vod-intro-tag">[唐]</view>
-			</view>
-			<view class="vod-intro">
-				<view class="vod-intro-blurb">
-					<text>
-						秦时明月汉时关，万里长征人未还
-						但使龙城飞将在，不教胡马度阴山
-					</text>
+		<view class="vod-actor">主演：{{vodData.vod_actor}}</view>
+		<view class="play-url-container">
+			<view class="play-url" v-for="(item,index) in vodPlayUrlData" :key="index">
+				<view class="play-source-name" v-if="index==0">播放列表</view>
+				<view class="play-source-name" v-if="index==1">在线播放2</view>
+				<view class="play-url-item" v-for="(vod,key) in item" :key="key" @click="playVideoUrl(vod)"
+					:class=" myNowVodData.indexOf(vod[1]) == -1 ? '' : 'active'  ">
+					{{vod[0]}}
 				</view>
+
 			</view>
 		</view>
-
-
+		
+		<view class="vod-content">
+			 <rich-text :nodes="vodData.vod_content"></rich-text>
+		</view>
 	</view>
 </template>
 
@@ -63,20 +46,25 @@
 				videoSrc: '',
 				myVodHistoryData: [],
 				myNowVodData: [],
-				showTest:false
+				showTest: false
 			}
 		},
 		onLoad(option) {
 			this.vodId = option.vod_id;
 			this.getVodDetailList(this.page, '', '', option.vod_id, '', '');
 
-			let myVodHistoryStr = uni.getStorageSync('myVodHistory');
-			if (myVodHistoryStr) {
-				this.myVodHistoryData = JSON.parse(myVodHistoryStr);
-			}
+			// let myVodHistoryStr = uni.getStorageSync('myVodHistory');
+			// if (myVodHistoryStr) {
+			// 	this.myVodHistoryData = JSON.parse(myVodHistoryStr);
+			// }
 
 		},
 		methods: {
+			turnVod(){
+				uni.navigateTo({
+					url:'./vod'
+				})
+			},
 			getVodDetailList(page, t, wd, ids, h, from) {
 				var data = {
 					ac: 'detail',
@@ -99,7 +87,7 @@
 				}
 				vodApi.vodList(data).then(res => {
 					console.log(res)
-					if(res=='域名未授权'){
+					if (res == '域名未授权') {
 						this.showTest = true;
 					}
 					if (res.code == 1) {
@@ -131,21 +119,17 @@
 			playVideoUrl(vod) {
 				let vodUrl = vod[1];
 				this.videoSrc = vodUrl;
-				let myVodHistory = JSON.parse(uni.getStorageSync('myVodHistory'));
-				let data = myVodHistory ? myVodHistory : [];
-				data.push(vodUrl);
-
-				let myNowVodData = this.myNowVodData;
-				let myNowVodIndex = myNowVodData.indexOf(vodUrl)
-
-				if (myNowVodIndex == -1) {
-					this.myNowVodData.push(vodUrl);
-				} else {
-					this.myNowVodData.splice(myNowVodIndex, 1);
+				let obj ={
+					isLei:1,
+					url:vodUrl
 				}
-				// console.log(this.myNowVodData)
-				uni.setStorageSync('myVodHistory', JSON.stringify(data))
-
+				console.log(vodUrl)
+				uni.setClipboardData({
+				    data: JSON.stringify(obj),
+				    success: function () {
+				        console.log('success');
+				    }
+				});
 			}
 		},
 		onShareAppMessage() {
@@ -159,19 +143,48 @@
 </script>
 
 <style>
+	page{
+		/* background-image: linear-gradient( 135deg, #A0FE65 10%, #FA016D 100%); */
+		background-image: linear-gradient( 135deg, #FFF6B7 10%, #F6416C 100%);
+	}
 	.vod-container {}
-
+	
+	.vod-t{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: first baseline;
+		padding: 20rpx;
+	}
+	.vod-t-l{
+		width: 40%;
+	}
+	.vod-t-l image{
+		width: 100%;
+		border-radius: 20rpx;
+	}
+	
+	.vod-t-r{
+		padding: 20rpx;
+	}
+	.vod-actor{
+		margin-top: 10rpx;
+		padding: 20rpx;
+		
+	}
 	.vod-video {
 		margin-top: 20rpx;
 		background-color: #FFFFFF;
 		padding: 20rpx;
 		text-align: center;
 	}
-	.vod-video image{
+
+	.vod-video image {
 		width: 100%;
 	}
+
 	.play-url-container {
-		background-color: #FFFFFF;
+		background-color: rgba(0,0,0,0.5);
 	}
 
 	.play-url {
@@ -198,38 +211,13 @@
 		font-size: 28rpx;
 	}
 
-	.vod-intro {
-		margin-top: 20rpx;
-		background-color: #FFFFFF;
-		padding: 20rpx;
-	}
-
-	.vod-intro-tags {
-		width: 100%;
+	.vod-content {
 		margin-top: 10rpx;
-		background-color: #FFFFFF;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-	}
-
-	.vod-intro-tag {
-		background-color: #000000;
+		background-color: rgba(0,0,0,0.7);
+		padding: 20rpx;
 		color: #FFFFFF;
-		margin: 10rpx;
-		padding: 10rpx 20rpx;
-		border-radius: 10rpx;
 	}
-
-	.vod-intro-blurb {
-		color: #808080;
-		font-size: 24rpx;
-		word-wrap: break-word;
-		word-break: break-all;
-	}
-
+	
 	.active-history {
 		background-color: #EEEEEE;
 	}

@@ -1,0 +1,6 @@
+
+.vod-video{
+	width: 100%;
+	text-align: center;
+}
+
