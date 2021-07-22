@@ -28,8 +28,8 @@
 		</view>
 		
 		<view class="vod-notice-bar">
-			<uni-notice-bar v-if="vodBannerData.length>0" showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#ffffff" color="#000000" text="爱盼影视,资源全部来源于网络,所有资源完全免费,如有问题请联系:xuliulei666@163.com !!!"></uni-notice-bar>
-			<uni-notice-bar v-else showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#ffffff" color="#000000" text="爱盼影视"></uni-notice-bar>
+			<uni-notice-bar v-if="vodBannerData.length>0" showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#000000" color="#ffffff" text="爱盼影视,资源全部来源于网络,所有资源完全免费,如有问题请联系:xuliulei666@163.com !!!"></uni-notice-bar>
+			<uni-notice-bar v-else showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#000000" color="#ffffff" text="爱盼影视"></uni-notice-bar>
 		</view>
 		
 		<view v-if="vodIndexData.length>0">
@@ -194,6 +194,9 @@
 </script>
 
 <style>
+	page{
+		background-color: rgba(0,0,0,0.8);
+	}
 	.vod-type-container {
 		margin-top: 10rpx;
 	}
@@ -211,7 +214,7 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
-		background-color: #FFFFFF;
+		background-color: rgba(0,0,0,0.2);
 	}
 	
 	.vod-t{
@@ -227,19 +230,19 @@
 	}
 	.vod-title{
 		font-size: 24rpx;
-		
+		color: #FFFFFF;
 	}
 	.vod-more{
 		font-size: 30rpx;
-		color: #808080;
+		color: #FFFFFF;
 	}
 	.vod-item {
 		width: 20%;
 		margin: 10rpx auto;
-		background-color: #FFFFFF;
+		background-color: #000000;
 		padding: 20rpx 10rpx;
 		border-radius: 20rpx;
-		border: 1rpx solid #EEEEEE;
+		border: 1rpx solid #808080;
 	}
 
 	.vod-img {
@@ -255,7 +258,7 @@
 	}
 
 	.vod-remarks {
-		color: #000000;
+		color: #FFFFFF;
 		text-align: center;
 		font-size: 18rpx;
 		text-decoration: underline;
@@ -264,7 +267,7 @@
 	.vod-name {
 		overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 		font-size: 18rpx;
-		color: #808080;
+		color: #FFFFFF;
 		font-weight: 700;
 		width: 100%;
 		text-align: center;
@@ -280,20 +283,20 @@
 		right: 40rpx;
 	}
 	.vod-banner-container{
-		
+		margin-top: 20rpx;
 	}
 	.swiper{
-		height:350rpx;
+		height:380rpx;
 	}
 	.banner-item{
 		width: 98%;
-		height:350rpx;
+		height:380rpx;
 		margin: 0 auto;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		background-color:	#004956;
+		background-color: #000000;
 	}
 	.banner-l{
 		width: 40%;

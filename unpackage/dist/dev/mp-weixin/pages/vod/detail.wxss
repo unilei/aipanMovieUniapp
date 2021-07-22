@@ -1,8 +1,6 @@
 
 page{
-	/* background-image: linear-gradient( 135deg, #A0FE65 10%, #FA016D 100%); */
-	background-image: -webkit-linear-gradient( 315deg, #FFF6B7 10%, #F6416C 100%);
-	background-image: linear-gradient( 135deg, #FFF6B7 10%, #F6416C 100%);
+	background-color: rgba(0,0,0,0.8);
 }
 .vod-container {}
 .vod-t{
@@ -20,6 +18,9 @@ page{
 	-webkit-justify-content: first baseline;
 	        justify-content: first baseline;
 	padding: 20rpx;
+	background-color: #000000;
+	color: #FFFFFF;
+	margin-top: 10rpx;
 }
 .vod-t-l{
 	width: 40%;
@@ -34,6 +35,8 @@ page{
 .vod-actor{
 	margin-top: 10rpx;
 	padding: 20rpx;
+	background-color: #000000;
+	color: #FFFFFF;
 }
 .vod-video {
 	margin-top: 20rpx;
@@ -45,7 +48,7 @@ page{
 	width: 100%;
 }
 .play-url-container {
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0,0,0,0.9);
 }
 .play-url {
 	width: 100%;
@@ -69,6 +72,8 @@ page{
 }
 .play-source-name {
 	width: 100%;
+	border-bottom: 1rpx solid #EEEEEE;
+	color: #FFFFFF;
 }
 .play-url-item {
 	background-color: #FFFFFF;
@@ -80,7 +85,7 @@ page{
 }
 .vod-content {
 	margin-top: 10rpx;
-	background-color: rgba(0,0,0,0.7);
+	background-color: rgba(0,0,0,0.9);
 	padding: 20rpx;
 	color: #FFFFFF;
 }

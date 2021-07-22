@@ -10,17 +10,17 @@
   "window": {
     "pageOrientation": "portrait",
     "navigationBarTitleText": "爱盼影视",
-    "navigationBarTextStyle": "black",
-    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#000000",
     "backgroundColor": "#F8F8F8",
     "backgroundColorTop": "#F4F5F6",
     "backgroundColorBottom": "#F4F5F6"
   },
   "tabBar": {
-    "color": "#000000",
+    "color": "#FFFFFF",
     "selectedColor": "#0aa0a8",
     "borderStyle": "black",
-    "backgroundColor": "#FFFFFF",
+    "backgroundColor": "#000000",
     "list": [
       {
         "pagePath": "pages/home/index",
@@ -33,12 +33,6 @@
         "iconPath": "static/video.png",
         "selectedIconPath": "static/video-fill.png",
         "text": "视频"
-      },
-      {
-        "pagePath": "pages/news/index",
-        "iconPath": "static/me.png",
-        "selectedIconPath": "static/me-fill.png",
-        "text": "个人中心"
       }
     ]
   },
@@ -47,5 +41,6 @@
       "desc": "演示定位能力"
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

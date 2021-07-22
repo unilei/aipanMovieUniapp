@@ -18,13 +18,15 @@
 		<view class="vod-actor">主演：{{vodData.vod_actor}}</view>
 		<view class="play-url-container">
 			<view class="play-url" v-for="(item,index) in vodPlayUrlData" :key="index">
-				<view class="play-source-name" v-if="index==0">播放列表</view>
-				<view class="play-source-name" v-if="index==1">在线播放2</view>
-				<view class="play-url-item" v-for="(vod,key) in item" :key="key" @click="playVideoUrl(vod)"
-					:class=" myNowVodData.indexOf(vod[1]) == -1 ? '' : 'active'  ">
-					{{vod[0]}}
-				</view>
-
+				<view class="play-source-name" v-if="index==0" @click="showVodPlayList()">播放列表</view>
+				<view class="play-source-name" v-if="index==1" @click="showVodPlayList()">在线播放2</view>
+				
+				<block v-if="showPlayList">
+					<view class="play-url-item" v-for="(vod,key) in item" :key="key" @click="playVideoUrl(vod)">
+						{{vod[0]}}
+					</view>
+				</block>
+				
 			</view>
 		</view>
 		
@@ -46,7 +48,8 @@
 				videoSrc: '',
 				myVodHistoryData: [],
 				myNowVodData: [],
-				showTest: false
+				showTest: false,
+				showPlayList:false
 			}
 		},
 		onLoad(option) {
@@ -60,6 +63,9 @@
 
 		},
 		methods: {
+			showVodPlayList(){
+				this.showPlayList = !this.showPlayList;
+			},
 			turnVod(){
 				uni.navigateTo({
 					url:'./vod'
@@ -144,8 +150,7 @@
 
 <style>
 	page{
-		/* background-image: linear-gradient( 135deg, #A0FE65 10%, #FA016D 100%); */
-		background-image: linear-gradient( 135deg, #FFF6B7 10%, #F6416C 100%);
+		background-color: rgba(0,0,0,0.8);
 	}
 	.vod-container {}
 	
@@ -155,6 +160,9 @@
 		align-items: center;
 		justify-content: first baseline;
 		padding: 20rpx;
+		background-color: #000000;
+		color: #FFFFFF;
+		margin-top: 10rpx;
 	}
 	.vod-t-l{
 		width: 40%;
@@ -170,7 +178,8 @@
 	.vod-actor{
 		margin-top: 10rpx;
 		padding: 20rpx;
-		
+		background-color: #000000;
+		color: #FFFFFF;
 	}
 	.vod-video {
 		margin-top: 20rpx;
@@ -184,7 +193,7 @@
 	}
 
 	.play-url-container {
-		background-color: rgba(0,0,0,0.5);
+		background-color: rgba(0,0,0,0.9);
 	}
 
 	.play-url {
@@ -200,6 +209,8 @@
 
 	.play-source-name {
 		width: 100%;
+		border-bottom: 1rpx solid #EEEEEE;
+		color: #FFFFFF;
 	}
 
 	.play-url-item {
@@ -213,7 +224,7 @@
 
 	.vod-content {
 		margin-top: 10rpx;
-		background-color: rgba(0,0,0,0.7);
+		background-color: rgba(0,0,0,0.9);
 		padding: 20rpx;
 		color: #FFFFFF;
 	}

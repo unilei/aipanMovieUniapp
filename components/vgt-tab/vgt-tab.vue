@@ -226,7 +226,7 @@ export default {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
-    background: #fff;
+    background: #FFFFFF;
 }
 
 .scroll-view_hold  ::-webkit-scrollbar {

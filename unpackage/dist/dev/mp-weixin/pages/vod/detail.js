@@ -97,33 +97,6 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l1 = _vm.__map(_vm.vodPlayUrlData, function(item, index) {
-    var $orig = _vm.__get_orig(item)
-
-    var l0 = _vm.__map(item, function(vod, key) {
-      var $orig = _vm.__get_orig(vod)
-
-      var g0 = _vm.myNowVodData.indexOf(vod[1])
-      return {
-        $orig: $orig,
-        g0: g0
-      }
-    })
-
-    return {
-      $orig: $orig,
-      l0: l0
-    }
-  })
-
-  _vm.$mp.data = Object.assign(
-    {},
-    {
-      $root: {
-        l1: l1
-      }
-    }
-  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -158,6 +131,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
 
 
 
@@ -230,11 +205,15 @@ var _vod = _interopRequireDefault(__webpack_require__(/*! @/api/vod.js */ 22));f
 //
 //
 //
-var _default = { data: function data() {return { vodData: [], vodId: 0, page: 1, vodPlayUrlData: [], videoSrc: '', myVodHistoryData: [], myNowVodData: [], showTest: false };}, onLoad: function onLoad(option) {this.vodId = option.vod_id;this.getVodDetailList(this.page, '', '', option.vod_id, '', ''); // let myVodHistoryStr = uni.getStorageSync('myVodHistory');
+//
+//
+var _default = { data: function data() {return { vodData: [], vodId: 0, page: 1, vodPlayUrlData: [], videoSrc: '', myVodHistoryData: [], myNowVodData: [], showTest: false, showPlayList: false };}, onLoad: function onLoad(option) {this.vodId = option.vod_id;this.getVodDetailList(this.page, '', '', option.vod_id, '', ''); // let myVodHistoryStr = uni.getStorageSync('myVodHistory');
     // if (myVodHistoryStr) {
     // 	this.myVodHistoryData = JSON.parse(myVodHistoryStr);
     // }
-  }, methods: { turnVod: function turnVod() {uni.navigateTo({ url: './vod' });}, getVodDetailList: function getVodDetailList(page, t, wd, ids, h, from) {var _this = this;var data = { ac: 'detail', pg: page };if (t) {data.t = t;}if (ids) {data.ids = ids;}
+  }, methods: { showVodPlayList: function showVodPlayList() {this.showPlayList = !this.showPlayList;}, turnVod: function turnVod() {uni.navigateTo({ url: './vod' });}, getVodDetailList: function getVodDetailList(page, t, wd, ids, h, from) {var _this = this;var data = { ac: 'detail', pg: page };if (t) {data.t = t;}if (ids) {
+        data.ids = ids;
+      }
       if (h) {
         data.h = h;
       }

@@ -204,11 +204,15 @@
 </script>
 
 <style>
+	page{
+		background-color: rgba(0,0,0,0.8);
+	}
 	.vod-type-container {
 		margin-top: 10rpx;
+		background-color: #000000;
 	}
 	.vod-search-container{
-		background-color: #FFFFFF;
+		background-color: #000000;
 		margin-top: 10rpx;
 	}
 
@@ -225,7 +229,7 @@
 	.vod-item {
 		width: 45%;
 		margin: 10rpx auto;
-		background-color: #FFFFFF;
+		background-color: #000000;
 		padding: 20rpx 10rpx;
 		border-radius: 20rpx;
 	}
@@ -240,7 +244,7 @@
 	}
 
 	.vod-remarks {
-		color: #000000;
+		color: #808080;
 		text-align: center;
 		font-size: 24rpx;
 		text-decoration: underline;
@@ -248,7 +252,7 @@
 
 	.vod-name {
 		font-size: 24rpx;
-		color: #808080;
+		color: #FFFFFF;
 		font-weight: 700;
 		width: 100%;
 		text-align: center;

@@ -1,4 +1,7 @@
 
+page{
+	background-color: rgba(0,0,0,0.8);
+}
 .vod-type-container {
 	margin-top: 10rpx;
 }
@@ -24,7 +27,7 @@
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	background-color: #FFFFFF;
+	background-color: rgba(0,0,0,0.2);
 }
 .vod-t{
 	width: 98%;
@@ -47,18 +50,19 @@
 }
 .vod-title{
 	font-size: 24rpx;
+	color: #FFFFFF;
 }
 .vod-more{
 	font-size: 30rpx;
-	color: #808080;
+	color: #FFFFFF;
 }
 .vod-item {
 	width: 20%;
 	margin: 10rpx auto;
-	background-color: #FFFFFF;
+	background-color: #000000;
 	padding: 20rpx 10rpx;
 	border-radius: 20rpx;
-	border: 1rpx solid #EEEEEE;
+	border: 1rpx solid #808080;
 }
 .vod-img {
 	width: 100%;
@@ -71,7 +75,7 @@
 	border-radius: 20rpx;
 }
 .vod-remarks {
-	color: #000000;
+	color: #FFFFFF;
 	text-align: center;
 	font-size: 18rpx;
 	text-decoration: underline;
@@ -79,7 +83,7 @@
 .vod-name {
 	overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 	font-size: 18rpx;
-	color: #808080;
+	color: #FFFFFF;
 	font-weight: 700;
 	width: 100%;
 	text-align: center;
@@ -94,13 +98,14 @@
 	right: 40rpx;
 }
 .vod-banner-container{
+	margin-top: 20rpx;
 }
 .swiper{
-	height:350rpx;
+	height:380rpx;
 }
 .banner-item{
 	width: 98%;
-	height:350rpx;
+	height:380rpx;
 	margin: 0 auto;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -115,7 +120,7 @@
 	-webkit-box-pack: center;
 	-webkit-justify-content: center;
 	        justify-content: center;
-	background-color:	#004956;
+	background-color: #000000;
 }
 .banner-l{
 	width: 40%;
