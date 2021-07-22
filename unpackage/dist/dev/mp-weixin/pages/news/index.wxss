@@ -1,34 +1,54 @@
 
 page{
-	background-color:#FFFFFF;
+	background-color:rgba(0,0,0,0.8);
 }
-.shi-container{
+.art{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	width: 96%;
+	margin: 20rpx auto 0;
+	padding: 10rpx;
+}
+.art-item{
+	width: 42%;
+	background-color: #000000;
+	margin-top: 10rpx;
+	margin-left: 10rpx;
 	padding: 20rpx;
+	
+	border: 1rpx solid #808080;
+	-webkit-box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+	        box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+	border-radius: 10rpx;
 }
-.shi-img{
-	width: 98%;
+.art-pic{
+	width: 90%;
 	margin: 0 auto;
 }
-.shi-img image{
+.art-pic image{
 	width: 100%;
 }
-.shi-title{
-	font-size: 34rpx;
-	font-weight: 700;
+.art-name{
 	text-align: center;
+	color: #FFFFFF;
+	font-size: 24rpx;
 }
-.shi-author{
-	font-size: 28rpx;
+.type-name{
 	text-align: center;
 	color: #808080;
-}
-.shi-content{
-	text-align: center;
-	font-size: 30rpx;
-}
-.my-container{
-	padding: 20rpx;
-	color: #888888;
-	border-top: 1rpx solid #EEEEEE;
+	font-size: 24rpx;
 }
 

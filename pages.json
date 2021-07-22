@@ -4,7 +4,7 @@
 		{
 			"path": "pages/home/index",
 			"style": {
-				"navigationBarTitleText": "首页",
+				"navigationBarTitleText": "爱盼影视",
 				"enablePullDownRefresh": true
 			}
 
@@ -12,14 +12,14 @@
 		{
 			"path": "pages/news/index",
 			"style": {
-				"navigationBarTitleText": "爱盼",
+				"navigationBarTitleText": "电影资讯",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/vod/detail",
 			"style": {
-				"navigationBarTitleText": "详情",
+				"navigationBarTitleText": "视频详情",
 				"enablePullDownRefresh": false
 			}
 
@@ -30,17 +30,32 @@
 				"enablePullDownRefresh": true
 			}
 
+		}, {
+			"path": "pages/vod/vod",
+			"style": {
+				"navigationBarTitleText": "正在播放",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/vod/vod",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+
+		, {
+			"path": "pages/actor/index",
+			"style": {
+				"navigationBarTitleText": "演员列表",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/news/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+				
+			}
+
+		}
+	],
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTitleText": "爱盼影视",
@@ -75,6 +90,18 @@
 				"iconPath": "static/video.png",
 				"selectedIconPath": "static/video-fill.png",
 				"text": "视频"
+			},
+			{
+				"pagePath": "pages/actor/index",
+				"iconPath": "static/video.png",
+				"selectedIconPath": "static/video-fill.png",
+				"text": "演员"
+			},
+			{
+				"pagePath": "pages/news/index",
+				"iconPath": "static/video.png",
+				"selectedIconPath": "static/video-fill.png",
+				"text": "资讯"
 			}
 		]
 	}

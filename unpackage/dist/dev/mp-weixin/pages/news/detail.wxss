@@ -1,0 +1,37 @@
+
+page {
+	/* background-color: rgba(0, 0, 0, 0.8); */
+}
+.art {
+	height: 900rpx;
+}
+.art-item {
+	width: 42%;
+	background-color: #000000;
+	margin-top: 10rpx;
+	margin-left: 10rpx;
+	padding: 20rpx;
+
+	border: 1rpx solid #808080;
+	-webkit-box-shadow: 0 0 10rpx 0rpx rgba(255, 255, 255, 0.2);
+	        box-shadow: 0 0 10rpx 0rpx rgba(255, 255, 255, 0.2);
+	border-radius: 10rpx;
+}
+.art-pic {
+	width: 90%;
+	margin: 0 auto;
+}
+.art-pic image {
+	width: 100%;
+}
+.art-name {
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 24rpx;
+}
+.type-name {
+	text-align: center;
+	color: #808080;
+	font-size: 24rpx;
+}
+

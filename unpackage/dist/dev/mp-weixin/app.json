@@ -4,7 +4,9 @@
     "pages/news/index",
     "pages/vod/detail",
     "pages/vod/list",
-    "pages/vod/vod"
+    "pages/vod/vod",
+    "pages/actor/index",
+    "pages/news/detail"
   ],
   "subPackages": [],
   "window": {
@@ -33,6 +35,18 @@
         "iconPath": "static/video.png",
         "selectedIconPath": "static/video-fill.png",
         "text": "视频"
+      },
+      {
+        "pagePath": "pages/actor/index",
+        "iconPath": "static/video.png",
+        "selectedIconPath": "static/video-fill.png",
+        "text": "演员"
+      },
+      {
+        "pagePath": "pages/news/index",
+        "iconPath": "static/video.png",
+        "selectedIconPath": "static/video-fill.png",
+        "text": "资讯"
       }
     ]
   },
@@ -41,6 +55,5 @@
       "desc": "演示定位能力"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

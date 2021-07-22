@@ -1,0 +1,1 @@
+<view class="container"><view class="art"><rich-text nodes="{{artDetailData.art_content}}"></rich-text><video src="https://vod5.wenshibaowenbei.com/share/QnNcKzJTTuPFAiAD" controls="{{true}}"></video></view></view>
