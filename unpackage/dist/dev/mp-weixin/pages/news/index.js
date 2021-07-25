@@ -171,7 +171,8 @@ var _art = _interopRequireDefault(__webpack_require__(/*! @/api/art.js */ 33));f
 //
 //
 //
-var _default = { data: function data() {return { artData: [], artTypeData: [] };}, onLoad: function onLoad() {this.getArtList();}, methods: { getArtList: function getArtList() {var _this = this;var data = { ac: 'list', pg: 1 };_art.default.artList(data).then(function (res) {if (res.code == 1) {_this.artData = res.list;
+var _default = { data: function data() {return { artData: [], artTypeData: [], page: 1 };}, onLoad: function onLoad() {this.getArtList();}, methods: { getArtList: function getArtList(page) {var _this = this;var data = { ac: 'list', pg: page };_art.default.artList(data).then(function (res) {if (res.code == 1) {
+          _this.artData = _this.artData.concat(res.list);
           _this.artTypeData = res.class;
         }
       }).catch(function (err) {
@@ -184,6 +185,15 @@ var _default = { data: function data() {return { artData: [], artTypeData: [] };
 
     } },
 
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.page = 1;
+    this.artData = [];
+    this.getArtList(this.page);
+  },
+  onReachBottom: function onReachBottom() {
+    this.page++;
+    this.getArtList(this.page);
+  },
   onShareAppMessage: function onShareAppMessage() {
 
   },

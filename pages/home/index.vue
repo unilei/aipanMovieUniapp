@@ -28,8 +28,8 @@
 		</view>
 		
 		<view class="vod-notice-bar">
-			<uni-notice-bar v-if="vodBannerData.length>0" showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#000000" color="#ffffff" text="爱盼影视,资源全部来源于网络,所有资源完全免费,如有问题请联系:xuliulei666@163.com !!!"></uni-notice-bar>
-			<uni-notice-bar v-else showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#000000" color="#ffffff" text="爱盼影视"></uni-notice-bar>
+			<uni-notice-bar v-if="vodBannerData.length>0" showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#141414" color="#d5d5d5" text="爱盼影视,资源全部来源于网络,所有资源完全免费,如有问题请联系:xuliulei666@163.com !!!"></uni-notice-bar>
+			<uni-notice-bar v-else showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#141414" color="#d5d5d5" text="爱盼影视"></uni-notice-bar>
 		</view>
 		
 		<view v-if="vodIndexData.length>0">
@@ -226,20 +226,20 @@
 		justify-content: space-between;
 		padding: 10rpx 20rpx;
 		border-bottom: 1rpx solid #808080;
-		
+		background-color: #141414;
 	}
 	.vod-title{
 		font-size: 24rpx;
-		color: #FFFFFF;
+		color: #D5D5D5;
 	}
 	.vod-more{
 		font-size: 30rpx;
-		color: #FFFFFF;
+		color: #D5D5D5;
 	}
 	.vod-item {
 		width: 20%;
 		margin: 10rpx auto;
-		background-color: #000000;
+		background-color: #2b2b2b;
 		padding: 20rpx 10rpx;
 		border-radius: 20rpx;
 		border: 1rpx solid #808080;
@@ -258,7 +258,7 @@
 	}
 
 	.vod-remarks {
-		color: #FFFFFF;
+		color: #d5d5d5;
 		text-align: center;
 		font-size: 18rpx;
 		text-decoration: underline;
@@ -267,7 +267,7 @@
 	.vod-name {
 		overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 		font-size: 18rpx;
-		color: #FFFFFF;
+		color: #D5D5D5;
 		font-weight: 700;
 		width: 100%;
 		text-align: center;
@@ -296,7 +296,7 @@
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-		background-color: #000000;
+		background-color: #141414;
 	}
 	.banner-l{
 		width: 40%;
@@ -309,13 +309,13 @@
 	}
 	.banner-r-1{
 		font-size: 40rpx;
-		color: #FFFFFF;
+		color: #D5D5D5;
 		text-align: center;
 		font-weight: 700;
 	}
 	.banner-r-2{
 		font-size: 34rpx;
-		color: #FFFFFF;
+		color: #D5D5D5;
 		text-align: center;
 		font-weight: 700;
 		text-decoration:underline;

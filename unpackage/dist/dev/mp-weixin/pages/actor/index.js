@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -191,10 +191,26 @@ var _actor = _interopRequireDefault(__webpack_require__(/*! @/api/actor.js */ 66
 //
 //
 //
-var _default = { data: function data() {return { actorData: [], actorTypeData: [] };}, onLoad: function onLoad() {this.getActorList();}, methods: { getActorList: function getActorList() {var _this = this;var data = { ac: 'detail', pg: 1 };_actor.default.actorList(data).then(function (res) {if (res.code == 1) {_this.actorData = res.list;_this.actorTypeData = res.class;}}).catch(function (err) {console.log(err);});} }, onShareAppMessage: function onShareAppMessage() {},
+var _default = { data: function data() {return { actorData: [], actorTypeData: [], page: 1 };}, onLoad: function onLoad() {this.getActorList(this.page);}, methods: { getActorList: function getActorList(page) {var _this = this;var data = { ac: 'list', pg: page };_actor.default.actorList(data).then(function (res) {if (res.code == 1) {_this.actorData = _this.actorData.concat(res.list);_this.actorTypeData = res.class;}}).catch(function (err) {console.log(err);});}, turnActorDetail: function turnActorDetail(id) {uni.navigateTo({ url: './detail?id=' + id });
+
+    } },
+
+  onReachBottom: function onReachBottom() {
+    this.page++;
+    this.getActorList(this.page);
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.page = 1;
+    this.actorData = [];
+    this.getActorList(this.page);
+  },
+  onShareAppMessage: function onShareAppMessage() {
+
+  },
   onShareTimeline: function onShareTimeline() {
 
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

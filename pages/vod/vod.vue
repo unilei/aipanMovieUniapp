@@ -1,8 +1,14 @@
 <template>
 	<view>
+		<!-- https://www.nihaowua.com/v/video.php -->
 		<view v-if="isShow" class="vod-video">
 			<video id="video" :src="videoSrc" controls autoplay page-gesture play-btn-position="center"
 				enable-play-gesture></video>
+			<view class="video-button">
+				<view class="video-download-button">
+					<button type="default" @click="downloadVideo(videoSrc)">缓存</button>
+				</view>
+			</view>
 		</view>
 		<view v-if="!isShow">
 			<view class="container">
@@ -82,7 +88,27 @@
 			// })
 		},
 		methods: {
-
+			downloadVideo(src){
+				const downloadTask = uni.downloadFile({
+				    url: src, //仅为示例，并非真实的资源
+				    success: (res) => {
+				        if (res.statusCode === 200) {
+				            console.log('下载成功');
+				        }
+				    }
+				});
+				
+				downloadTask.onProgressUpdate((res) => {
+				    console.log('下载进度' + res.progress);
+				    console.log('已经下载的数据长度' + res.totalBytesWritten);
+				    console.log('预期需要下载的数据总长度' + res.totalBytesExpectedToWrite);
+				
+				    // 测试条件，取消下载任务。
+				    if (res.progress > 50) {
+				        downloadTask.abort();
+				    }
+				});
+			}
 		}
 	}
 </script>
@@ -93,7 +119,7 @@
 	}
 	.vod-video {
 		width: 100%;
-		height: 100%;
+		height: 90%;
 		text-align: center;
 		position: fixed;
 		z-index: 100;
@@ -145,5 +171,17 @@
 		padding: 20rpx;
 		color: #888888;
 		border-top: 1rpx solid #EEEEEE;
+	}
+	.video-button{
+		height: 10%;
+	}
+	.video-download-button{
+		width: 100%;
+	}
+	.video-download-button button{
+		color: #FFFFFF;
+		background-color: #00AAAA;
+		height: 100%;
+		font-size: 24rpx;
 	}
 </style>

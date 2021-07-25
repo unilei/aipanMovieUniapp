@@ -2059,7 +2059,788 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ 111:
+/***/ 119:
+/*!**********************************************************************!*\
+  !*** E:/workplace/aipan-uniapp/components/u-parse/libs/html2json.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _wxDiscode = _interopRequireDefault(__webpack_require__(/*! ./wxDiscode */ 120));
+var _htmlparser = _interopRequireDefault(__webpack_require__(/*! ./htmlparser */ 121));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /**
+                                                                                                                                                                 * html2Json 改造来自: https://github.com/Jxck/html2json
+                                                                                                                                                                 *
+                                                                                                                                                                 *
+                                                                                                                                                                 * author: Di (微信小程序开发工程师)
+                                                                                                                                                                 * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+                                                                                                                                                                 *               垂直微信小程序开发交流社区
+                                                                                                                                                                 *
+                                                                                                                                                                 * github地址: https://github.com/icindy/wxParse
+                                                                                                                                                                 *
+                                                                                                                                                                 * for: 微信小程序富文本解析
+                                                                                                                                                                 * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+                                                                                                                                                                 */function makeMap(str) {var obj = {};var items = str.split(',');for (var i = 0; i < items.length; i += 1) {obj[items[i]] = true;}return obj;} // Block Elements - HTML 5
+var block = makeMap('br,code,address,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video'); // Inline Elements - HTML 5
+var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
+
+function removeDOCTYPE(html) {
+  var isDocument = /<body.*>([^]*)<\/body>/.test(html);
+  return isDocument ? RegExp.$1 : html;
+}
+
+function trimHtml(html) {
+  return html.
+  replace(/<!--.*?-->/gi, '').
+  replace(/\/\*.*?\*\//gi, '').
+  replace(/[ ]+</gi, '<').
+  replace(/<script[^]*<\/script>/gi, '').
+  replace(/<style[^]*<\/style>/gi, '');
+}
+
+function getScreenInfo() {
+  var screen = {};
+  wx.getSystemInfo({
+    success: function success(res) {
+      screen.width = res.windowWidth;
+      screen.height = res.windowHeight;
+    } });
+
+  return screen;
+}
+
+function html2json(html, customHandler, imageProp, host) {
+  // 处理字符串
+  html = removeDOCTYPE(html);
+  html = trimHtml(html);
+  html = _wxDiscode.default.strDiscode(html);
+  // 生成node节点
+  var bufArray = [];
+  var results = {
+    nodes: [],
+    imageUrls: [] };
+
+
+  var screen = getScreenInfo();
+  function Node(tag) {
+    this.node = 'element';
+    this.tag = tag;
+
+    this.$screen = screen;
+  }
+
+  (0, _htmlparser.default)(html, {
+    start: function start(tag, attrs, unary) {
+      // node for this element
+      var node = new Node(tag);
+
+      if (bufArray.length !== 0) {
+        var parent = bufArray[0];
+        if (parent.nodes === undefined) {
+          parent.nodes = [];
+        }
+      }
+
+      if (block[tag]) {
+        node.tagType = 'block';
+      } else if (inline[tag]) {
+        node.tagType = 'inline';
+      } else if (closeSelf[tag]) {
+        node.tagType = 'closeSelf';
+      }
+
+      node.attr = attrs.reduce(function (pre, attr) {var
+        name = attr.name;var
+        value = attr.value;
+        if (name === 'class') {
+          node.classStr = value;
+        }
+        // has multi attibutes
+        // make it array of attribute
+        if (name === 'style') {
+          node.styleStr = value;
+        }
+        if (value.match(/ /)) {
+          value = value.split(' ');
+        }
+
+        // if attr already exists
+        // merge it
+        if (pre[name]) {
+          if (Array.isArray(pre[name])) {
+            // already array, push to last
+            pre[name].push(value);
+          } else {
+            // single value, make it array
+            pre[name] = [pre[name], value];
+          }
+        } else {
+          // not exist, put it
+          pre[name] = value;
+        }
+
+        return pre;
+      }, {});
+
+      // 优化样式相关属性
+      if (node.classStr) {
+        node.classStr += " ".concat(node.tag);
+      } else {
+        node.classStr = node.tag;
+      }
+      if (node.tagType === 'inline') {
+        node.classStr += ' inline';
+      }
+
+      // 对img添加额外数据
+      if (node.tag === 'img') {
+        var imgUrl = node.attr.src;
+        imgUrl = _wxDiscode.default.urlToHttpUrl(imgUrl, imageProp.domain);
+        Object.assign(node.attr, imageProp, {
+          src: imgUrl || '' });
+
+        if (imgUrl) {
+          results.imageUrls.push(imgUrl);
+        }
+      }
+
+      // 处理a标签属性
+      if (node.tag === 'a') {
+        node.attr.href = node.attr.href || '';
+      }
+
+      // 处理font标签样式属性
+      if (node.tag === 'font') {
+        var fontSize = [
+        'x-small',
+        'small',
+        'medium',
+        'large',
+        'x-large',
+        'xx-large',
+        '-webkit-xxx-large'];
+
+        var styleAttrs = {
+          color: 'color',
+          face: 'font-family',
+          size: 'font-size' };
+
+        if (!node.styleStr) node.styleStr = '';
+        Object.keys(styleAttrs).forEach(function (key) {
+          if (node.attr[key]) {
+            var value = key === 'size' ? fontSize[node.attr[key] - 1] : node.attr[key];
+            node.styleStr += "".concat(styleAttrs[key], ": ").concat(value, ";");
+          }
+        });
+      }
+
+      // 临时记录source资源
+      if (node.tag === 'source') {
+        results.source = node.attr.src;
+      }
+
+      if (customHandler.start) {
+        customHandler.start(node, results);
+      }
+
+      if (unary) {
+        // if this tag doesn't have end tag
+        // like <img src="hoge.png"/>
+        // add to parents
+        var _parent = bufArray[0] || results;
+        if (_parent.nodes === undefined) {
+          _parent.nodes = [];
+        }
+        _parent.nodes.push(node);
+      } else {
+        bufArray.unshift(node);
+      }
+    },
+    end: function end(tag) {
+      // merge into parent tag
+      var node = bufArray.shift();
+      if (node.tag !== tag) {
+        console.error('invalid state: mismatch end tag');
+      }
+
+      // 当有缓存source资源时于于video补上src资源
+      if (node.tag === 'video' && results.source) {
+        node.attr.src = results.source;
+        delete results.source;
+      }
+
+      if (customHandler.end) {
+        customHandler.end(node, results);
+      }
+
+      if (bufArray.length === 0) {
+        results.nodes.push(node);
+      } else {
+        var parent = bufArray[0];
+        if (!parent.nodes) {
+          parent.nodes = [];
+        }
+        parent.nodes.push(node);
+      }
+    },
+    chars: function chars(text) {
+      if (!text.trim()) return;
+
+      var node = {
+        node: 'text',
+        text: text };
+
+
+      if (customHandler.chars) {
+        customHandler.chars(node, results);
+      }
+
+      if (bufArray.length === 0) {
+        results.nodes.push(node);
+      } else {
+        var parent = bufArray[0];
+        if (parent.nodes === undefined) {
+          parent.nodes = [];
+        }
+        parent.nodes.push(node);
+      }
+    } });
+
+
+  return results;
+}var _default =
+
+html2json;exports.default = _default;
+
+/***/ }),
+
+/***/ 12:
+/*!************************************************!*\
+  !*** E:/workplace/aipan-uniapp/store/index.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 8));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
+
+_vue.default.use(_vuex.default);
+
+var store = new _vuex.default.Store({
+  state: {
+    hasLogin: false,
+    isUniverifyLogin: false,
+    loginProvider: "",
+    openid: null,
+    testvuex: false,
+    colorIndex: 0,
+    colorList: ['#FF0000', '#00FF00', '#0000FF'],
+    noMatchLeftWindow: true,
+    active: 'componentPage',
+    leftWinActive: '/pages/component/view/view',
+    activeOpen: '',
+    menu: [],
+    univerifyErrorMsg: '' },
+
+  mutations: {
+    login: function login(state, provider) {
+      state.hasLogin = true;
+      state.loginProvider = provider;
+    },
+    logout: function logout(state) {
+      state.hasLogin = false;
+      state.openid = null;
+    },
+    setOpenid: function setOpenid(state, openid) {
+      state.openid = openid;
+    },
+    setTestTrue: function setTestTrue(state) {
+      state.testvuex = true;
+    },
+    setTestFalse: function setTestFalse(state) {
+      state.testvuex = false;
+    },
+    setColorIndex: function setColorIndex(state, index) {
+      state.colorIndex = index;
+    },
+    setMatchLeftWindow: function setMatchLeftWindow(state, matchLeftWindow) {
+      state.noMatchLeftWindow = !matchLeftWindow;
+    },
+    setActive: function setActive(state, tabPage) {
+      state.active = tabPage;
+    },
+    setLeftWinActive: function setLeftWinActive(state, leftWinActive) {
+      state.leftWinActive = leftWinActive;
+    },
+    setActiveOpen: function setActiveOpen(state, activeOpen) {
+      state.activeOpen = activeOpen;
+    },
+    setMenu: function setMenu(state, menu) {
+      state.menu = menu;
+    },
+    setUniverifyLogin: function setUniverifyLogin(state, payload) {
+      typeof payload !== 'boolean' ? payload = !!payload : '';
+      state.isUniverifyLogin = payload;
+    },
+    setUniverifyErrorMsg: function setUniverifyErrorMsg(state) {var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      state.univerifyErrorMsg = payload;
+    } },
+
+  getters: {
+    currentColor: function currentColor(state) {
+      return state.colorList[state.colorIndex];
+    } },
+
+  actions: {
+    // lazy loading openid
+    getUserOpenId: function () {var _getUserOpenId = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(_ref) {var commit, state;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                commit = _ref.commit,
+                state = _ref.state;_context.next = 3;return (
+
+                  new Promise(function (resolve, reject) {
+                    if (state.openid) {
+                      resolve(state.openid);
+                    } else {
+                      uni.login({
+                        success: function success(data) {
+                          commit('login');
+                          setTimeout(function () {//模拟异步请求服务器获取 openid
+                            var openid = '123456789';
+                            console.log('uni.request mock openid[' + openid + ']');
+                            commit('setOpenid', openid);
+                            resolve(openid);
+                          }, 1000);
+                        },
+                        fail: function fail(err) {
+                          console.log('uni.login 接口调用失败，将无法正常使用开放接口等服务', err);
+                          reject(err);
+                        } });
+
+                    }
+                  }));case 3:return _context.abrupt("return", _context.sent);case 4:case "end":return _context.stop();}}}, _callee);}));function getUserOpenId(_x) {return _getUserOpenId.apply(this, arguments);}return getUserOpenId;}(),
+
+    getPhoneNumber: function getPhoneNumber(_ref2,
+
+    univerifyInfo) {var commit = _ref2.commit;
+      return new Promise(function (resolve, reject) {
+        uni.request({
+          url: 'https://97fca9f2-41f6-449f-a35e-3f135d4c3875.bspapp.com/http/univerify-login',
+          method: 'POST',
+          data: univerifyInfo,
+          success: function success(res) {
+            var data = res.data;
+            if (data.success) {
+              resolve(data.phoneNumber);
+            } else {
+              reject(res);
+            }
+
+          },
+          fail: function fail(err) {
+            reject(res);
+          } });
+
+      });
+    } } });var _default =
+
+
+
+store;exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 120:
+/*!**********************************************************************!*\
+  !*** E:/workplace/aipan-uniapp/components/u-parse/libs/wxDiscode.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // HTML 支持的数学符号
+function strNumDiscode(str) {
+  str = str.replace(/&forall;/g, '∀');
+  str = str.replace(/&part;/g, '∂');
+  str = str.replace(/&exist;/g, '∃');
+  str = str.replace(/&empty;/g, '∅');
+  str = str.replace(/&nabla;/g, '∇');
+  str = str.replace(/&isin;/g, '∈');
+  str = str.replace(/&notin;/g, '∉');
+  str = str.replace(/&ni;/g, '∋');
+  str = str.replace(/&prod;/g, '∏');
+  str = str.replace(/&sum;/g, '∑');
+  str = str.replace(/&minus;/g, '−');
+  str = str.replace(/&lowast;/g, '∗');
+  str = str.replace(/&radic;/g, '√');
+  str = str.replace(/&prop;/g, '∝');
+  str = str.replace(/&infin;/g, '∞');
+  str = str.replace(/&ang;/g, '∠');
+  str = str.replace(/&and;/g, '∧');
+  str = str.replace(/&or;/g, '∨');
+  str = str.replace(/&cap;/g, '∩');
+  str = str.replace(/&cup;/g, '∪');
+  str = str.replace(/&int;/g, '∫');
+  str = str.replace(/&there4;/g, '∴');
+  str = str.replace(/&sim;/g, '∼');
+  str = str.replace(/&cong;/g, '≅');
+  str = str.replace(/&asymp;/g, '≈');
+  str = str.replace(/&ne;/g, '≠');
+  str = str.replace(/&le;/g, '≤');
+  str = str.replace(/&ge;/g, '≥');
+  str = str.replace(/&sub;/g, '⊂');
+  str = str.replace(/&sup;/g, '⊃');
+  str = str.replace(/&nsub;/g, '⊄');
+  str = str.replace(/&sube;/g, '⊆');
+  str = str.replace(/&supe;/g, '⊇');
+  str = str.replace(/&oplus;/g, '⊕');
+  str = str.replace(/&otimes;/g, '⊗');
+  str = str.replace(/&perp;/g, '⊥');
+  str = str.replace(/&sdot;/g, '⋅');
+  return str;
+}
+
+// HTML 支持的希腊字母
+function strGreeceDiscode(str) {
+  str = str.replace(/&Alpha;/g, 'Α');
+  str = str.replace(/&Beta;/g, 'Β');
+  str = str.replace(/&Gamma;/g, 'Γ');
+  str = str.replace(/&Delta;/g, 'Δ');
+  str = str.replace(/&Epsilon;/g, 'Ε');
+  str = str.replace(/&Zeta;/g, 'Ζ');
+  str = str.replace(/&Eta;/g, 'Η');
+  str = str.replace(/&Theta;/g, 'Θ');
+  str = str.replace(/&Iota;/g, 'Ι');
+  str = str.replace(/&Kappa;/g, 'Κ');
+  str = str.replace(/&Lambda;/g, 'Λ');
+  str = str.replace(/&Mu;/g, 'Μ');
+  str = str.replace(/&Nu;/g, 'Ν');
+  str = str.replace(/&Xi;/g, 'Ν');
+  str = str.replace(/&Omicron;/g, 'Ο');
+  str = str.replace(/&Pi;/g, 'Π');
+  str = str.replace(/&Rho;/g, 'Ρ');
+  str = str.replace(/&Sigma;/g, 'Σ');
+  str = str.replace(/&Tau;/g, 'Τ');
+  str = str.replace(/&Upsilon;/g, 'Υ');
+  str = str.replace(/&Phi;/g, 'Φ');
+  str = str.replace(/&Chi;/g, 'Χ');
+  str = str.replace(/&Psi;/g, 'Ψ');
+  str = str.replace(/&Omega;/g, 'Ω');
+
+  str = str.replace(/&alpha;/g, 'α');
+  str = str.replace(/&beta;/g, 'β');
+  str = str.replace(/&gamma;/g, 'γ');
+  str = str.replace(/&delta;/g, 'δ');
+  str = str.replace(/&epsilon;/g, 'ε');
+  str = str.replace(/&zeta;/g, 'ζ');
+  str = str.replace(/&eta;/g, 'η');
+  str = str.replace(/&theta;/g, 'θ');
+  str = str.replace(/&iota;/g, 'ι');
+  str = str.replace(/&kappa;/g, 'κ');
+  str = str.replace(/&lambda;/g, 'λ');
+  str = str.replace(/&mu;/g, 'μ');
+  str = str.replace(/&nu;/g, 'ν');
+  str = str.replace(/&xi;/g, 'ξ');
+  str = str.replace(/&omicron;/g, 'ο');
+  str = str.replace(/&pi;/g, 'π');
+  str = str.replace(/&rho;/g, 'ρ');
+  str = str.replace(/&sigmaf;/g, 'ς');
+  str = str.replace(/&sigma;/g, 'σ');
+  str = str.replace(/&tau;/g, 'τ');
+  str = str.replace(/&upsilon;/g, 'υ');
+  str = str.replace(/&phi;/g, 'φ');
+  str = str.replace(/&chi;/g, 'χ');
+  str = str.replace(/&psi;/g, 'ψ');
+  str = str.replace(/&omega;/g, 'ω');
+  str = str.replace(/&thetasym;/g, 'ϑ');
+  str = str.replace(/&upsih;/g, 'ϒ');
+  str = str.replace(/&piv;/g, 'ϖ');
+  str = str.replace(/&middot;/g, '·');
+  return str;
+}
+
+function strcharacterDiscode(str) {
+  // 加入常用解析
+  str = str.replace(/&nbsp;/g, ' ');
+  str = str.replace(/&ensp;/g, ' ');
+  str = str.replace(/&emsp;/g, '　');
+  str = str.replace(/&quot;/g, "'");
+  str = str.replace(/&amp;/g, '&');
+  str = str.replace(/&lt;/g, '<');
+  str = str.replace(/&gt;/g, '>');
+  str = str.replace(/&#8226;/g, '•');
+
+  return str;
+}
+
+// HTML 支持的其他实体
+function strOtherDiscode(str) {
+  str = str.replace(/&OElig;/g, 'Œ');
+  str = str.replace(/&oelig;/g, 'œ');
+  str = str.replace(/&Scaron;/g, 'Š');
+  str = str.replace(/&scaron;/g, 'š');
+  str = str.replace(/&Yuml;/g, 'Ÿ');
+  str = str.replace(/&fnof;/g, 'ƒ');
+  str = str.replace(/&circ;/g, 'ˆ');
+  str = str.replace(/&tilde;/g, '˜');
+  str = str.replace(/&ensp;/g, '');
+  str = str.replace(/&emsp;/g, '');
+  str = str.replace(/&thinsp;/g, '');
+  str = str.replace(/&zwnj;/g, '');
+  str = str.replace(/&zwj;/g, '');
+  str = str.replace(/&lrm;/g, '');
+  str = str.replace(/&rlm;/g, '');
+  str = str.replace(/&ndash;/g, '–');
+  str = str.replace(/&mdash;/g, '—');
+  str = str.replace(/&lsquo;/g, '‘');
+  str = str.replace(/&rsquo;/g, '’');
+  str = str.replace(/&sbquo;/g, '‚');
+  str = str.replace(/&ldquo;/g, '“');
+  str = str.replace(/&rdquo;/g, '”');
+  str = str.replace(/&bdquo;/g, '„');
+  str = str.replace(/&dagger;/g, '†');
+  str = str.replace(/&Dagger;/g, '‡');
+  str = str.replace(/&bull;/g, '•');
+  str = str.replace(/&hellip;/g, '…');
+  str = str.replace(/&permil;/g, '‰');
+  str = str.replace(/&prime;/g, '′');
+  str = str.replace(/&Prime;/g, '″');
+  str = str.replace(/&lsaquo;/g, '‹');
+  str = str.replace(/&rsaquo;/g, '›');
+  str = str.replace(/&oline;/g, '‾');
+  str = str.replace(/&euro;/g, '€');
+  str = str.replace(/&trade;/g, '™');
+
+  str = str.replace(/&larr;/g, '←');
+  str = str.replace(/&uarr;/g, '↑');
+  str = str.replace(/&rarr;/g, '→');
+  str = str.replace(/&darr;/g, '↓');
+  str = str.replace(/&harr;/g, '↔');
+  str = str.replace(/&crarr;/g, '↵');
+  str = str.replace(/&lceil;/g, '⌈');
+  str = str.replace(/&rceil;/g, '⌉');
+
+  str = str.replace(/&lfloor;/g, '⌊');
+  str = str.replace(/&rfloor;/g, '⌋');
+  str = str.replace(/&loz;/g, '◊');
+  str = str.replace(/&spades;/g, '♠');
+  str = str.replace(/&clubs;/g, '♣');
+  str = str.replace(/&hearts;/g, '♥');
+
+  str = str.replace(/&diams;/g, '♦');
+  str = str.replace(/&#39;/g, "'");
+  return str;
+}
+
+function strDiscode(str) {
+  str = strNumDiscode(str);
+  str = strGreeceDiscode(str);
+  str = strcharacterDiscode(str);
+  str = strOtherDiscode(str);
+  return str;
+}
+
+function urlToHttpUrl(url, domain) {
+  if (/^\/\//.test(url)) {
+    return "https:".concat(url);
+  } else if (/^\//.test(url)) {
+    return "https://".concat(domain).concat(url);
+  }
+  return url;
+}var _default =
+
+{
+  strDiscode: strDiscode,
+  urlToHttpUrl: urlToHttpUrl };exports.default = _default;
+
+/***/ }),
+
+/***/ 121:
+/*!***********************************************************************!*\
+  !*** E:/workplace/aipan-uniapp/components/u-parse/libs/htmlparser.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      *
+                                                                                                      * htmlParser改造自: https://github.com/blowsie/Pure-JavaScript-HTML5-Parser
+                                                                                                      *
+                                                                                                      * author: Di (微信小程序开发工程师)
+                                                                                                      * organization: WeAppDev(微信小程序开发论坛)(http://weappdev.com)
+                                                                                                      *               垂直微信小程序开发交流社区
+                                                                                                      *
+                                                                                                      * github地址: https://github.com/icindy/wxParse
+                                                                                                      *
+                                                                                                      * for: 微信小程序富文本解析
+                                                                                                      * detail : http://weappdev.com/t/wxparse-alpha0-1-html-markdown/184
+                                                                                                      */
+// Regular Expressions for parsing tags and attributes
+
+var startTag = /^<([-A-Za-z0-9_]+)((?:\s+[a-zA-Z0-9_:][-a-zA-Z0-9_:.]*(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/;
+var endTag = /^<\/([-A-Za-z0-9_]+)[^>]*>/;
+var attr = /([a-zA-Z0-9_:][-a-zA-Z0-9_:.]*)(?:\s*=\s*(?:(?:"((?:\\.|[^"])*)")|(?:'((?:\\.|[^'])*)')|([^>\s]+)))?/g;
+
+function makeMap(str) {
+  var obj = {};
+  var items = str.split(',');
+  for (var i = 0; i < items.length; i += 1) {obj[items[i]] = true;}
+  return obj;
+}
+
+// Empty Elements - HTML 5
+var empty = makeMap('area,base,basefont,br,col,frame,hr,img,input,link,meta,param,embed,command,keygen,source,track,wbr');
+
+// Block Elements - HTML 5
+var block = makeMap('address,code,article,applet,aside,audio,blockquote,button,canvas,center,dd,del,dir,div,dl,dt,fieldset,figcaption,figure,footer,form,frameset,h1,h2,h3,h4,h5,h6,header,hgroup,hr,iframe,ins,isindex,li,map,menu,noframes,noscript,object,ol,output,p,pre,section,script,table,tbody,td,tfoot,th,thead,tr,ul,video');
+
+// Inline Elements - HTML 5
+var inline = makeMap('a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,del,dfn,em,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,span,strike,strong,sub,sup,textarea,tt,u,var');
+
+// Elements that you can, intentionally, leave open
+// (and which close themselves)
+var closeSelf = makeMap('colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr');
+
+// Attributes that have their values filled in disabled="disabled"
+var fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected');
+
+function HTMLParser(html, handler) {
+  var index;
+  var chars;
+  var match;
+  var last = html;
+  var stack = [];
+
+  stack.last = function () {return stack[stack.length - 1];};
+
+  function parseEndTag(tag, tagName) {
+    // If no tag name is provided, clean shop
+    var pos;
+    if (!tagName) {
+      pos = 0;
+    } else {
+      // Find the closest opened tag of the same type
+      tagName = tagName.toLowerCase();
+      for (pos = stack.length - 1; pos >= 0; pos -= 1) {
+        if (stack[pos] === tagName) break;
+      }
+    }
+    if (pos >= 0) {
+      // Close all the open elements, up the stack
+      for (var i = stack.length - 1; i >= pos; i -= 1) {
+        if (handler.end) handler.end(stack[i]);
+      }
+
+      // Remove the open elements from the stack
+      stack.length = pos;
+    }
+  }
+
+  function parseStartTag(tag, tagName, rest, unary) {
+    tagName = tagName.toLowerCase();
+
+    if (block[tagName]) {
+      while (stack.last() && inline[stack.last()]) {
+        parseEndTag('', stack.last());
+      }
+    }
+
+    if (closeSelf[tagName] && stack.last() === tagName) {
+      parseEndTag('', tagName);
+    }
+
+    unary = empty[tagName] || !!unary;
+
+    if (!unary) stack.push(tagName);
+
+    if (handler.start) {
+      var attrs = [];
+
+      rest.replace(attr, function genAttr(matches, name) {
+        var value = arguments[2] || arguments[3] || arguments[4] || (fillAttrs[name] ? name : '');
+
+        attrs.push({
+          name: name,
+          value: value,
+          escaped: value.replace(/(^|[^\\])"/g, '$1\\"') // "
+        });
+      });
+
+      if (handler.start) {
+        handler.start(tagName, attrs, unary);
+      }
+    }
+  }
+
+  while (html) {
+    chars = true;
+
+    if (html.indexOf('</') === 0) {
+      match = html.match(endTag);
+
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(endTag, parseEndTag);
+        chars = false;
+      }
+
+      // start tag
+    } else if (html.indexOf('<') === 0) {
+      match = html.match(startTag);
+
+      if (match) {
+        html = html.substring(match[0].length);
+        match[0].replace(startTag, parseStartTag);
+        chars = false;
+      }
+    }
+
+    if (chars) {
+      index = html.indexOf('<');
+      var text = '';
+      while (index === 0) {
+        text += '<';
+        html = html.substring(1);
+        index = html.indexOf('<');
+      }
+      text += index < 0 ? html : html.substring(0, index);
+      html = index < 0 ? '' : html.substring(index);
+
+      if (handler.chars) handler.chars(text);
+    }
+
+    if (html === last) throw new Error("Parse Error: ".concat(html));
+    last = html;
+  }
+
+  // Clean up any remaining tags
+  parseEndTag();
+}var _default =
+
+HTMLParser;exports.default = _default;
+
+/***/ }),
+
+/***/ 127:
 /*!*************************************************************************************!*\
   !*** E:/workplace/aipan-uniapp/uni_modules/uni-icons/components/uni-icons/icons.js ***!
   \*************************************************************************************/
@@ -2198,143 +2979,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   "cloud-download-filled": "\uE8E9",
   "headphones": "\uE8BF",
   "shop": "\uE609" };exports.default = _default;
-
-/***/ }),
-
-/***/ 12:
-/*!************************************************!*\
-  !*** E:/workplace/aipan-uniapp/store/index.js ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 8));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
-
-_vue.default.use(_vuex.default);
-
-var store = new _vuex.default.Store({
-  state: {
-    hasLogin: false,
-    isUniverifyLogin: false,
-    loginProvider: "",
-    openid: null,
-    testvuex: false,
-    colorIndex: 0,
-    colorList: ['#FF0000', '#00FF00', '#0000FF'],
-    noMatchLeftWindow: true,
-    active: 'componentPage',
-    leftWinActive: '/pages/component/view/view',
-    activeOpen: '',
-    menu: [],
-    univerifyErrorMsg: '' },
-
-  mutations: {
-    login: function login(state, provider) {
-      state.hasLogin = true;
-      state.loginProvider = provider;
-    },
-    logout: function logout(state) {
-      state.hasLogin = false;
-      state.openid = null;
-    },
-    setOpenid: function setOpenid(state, openid) {
-      state.openid = openid;
-    },
-    setTestTrue: function setTestTrue(state) {
-      state.testvuex = true;
-    },
-    setTestFalse: function setTestFalse(state) {
-      state.testvuex = false;
-    },
-    setColorIndex: function setColorIndex(state, index) {
-      state.colorIndex = index;
-    },
-    setMatchLeftWindow: function setMatchLeftWindow(state, matchLeftWindow) {
-      state.noMatchLeftWindow = !matchLeftWindow;
-    },
-    setActive: function setActive(state, tabPage) {
-      state.active = tabPage;
-    },
-    setLeftWinActive: function setLeftWinActive(state, leftWinActive) {
-      state.leftWinActive = leftWinActive;
-    },
-    setActiveOpen: function setActiveOpen(state, activeOpen) {
-      state.activeOpen = activeOpen;
-    },
-    setMenu: function setMenu(state, menu) {
-      state.menu = menu;
-    },
-    setUniverifyLogin: function setUniverifyLogin(state, payload) {
-      typeof payload !== 'boolean' ? payload = !!payload : '';
-      state.isUniverifyLogin = payload;
-    },
-    setUniverifyErrorMsg: function setUniverifyErrorMsg(state) {var payload = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      state.univerifyErrorMsg = payload;
-    } },
-
-  getters: {
-    currentColor: function currentColor(state) {
-      return state.colorList[state.colorIndex];
-    } },
-
-  actions: {
-    // lazy loading openid
-    getUserOpenId: function () {var _getUserOpenId = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(_ref) {var commit, state;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                commit = _ref.commit,
-                state = _ref.state;_context.next = 3;return (
-
-                  new Promise(function (resolve, reject) {
-                    if (state.openid) {
-                      resolve(state.openid);
-                    } else {
-                      uni.login({
-                        success: function success(data) {
-                          commit('login');
-                          setTimeout(function () {//模拟异步请求服务器获取 openid
-                            var openid = '123456789';
-                            console.log('uni.request mock openid[' + openid + ']');
-                            commit('setOpenid', openid);
-                            resolve(openid);
-                          }, 1000);
-                        },
-                        fail: function fail(err) {
-                          console.log('uni.login 接口调用失败，将无法正常使用开放接口等服务', err);
-                          reject(err);
-                        } });
-
-                    }
-                  }));case 3:return _context.abrupt("return", _context.sent);case 4:case "end":return _context.stop();}}}, _callee);}));function getUserOpenId(_x) {return _getUserOpenId.apply(this, arguments);}return getUserOpenId;}(),
-
-    getPhoneNumber: function getPhoneNumber(_ref2,
-
-    univerifyInfo) {var commit = _ref2.commit;
-      return new Promise(function (resolve, reject) {
-        uni.request({
-          url: 'https://97fca9f2-41f6-449f-a35e-3f135d4c3875.bspapp.com/http/univerify-login',
-          method: 'POST',
-          data: univerifyInfo,
-          success: function success(res) {
-            var data = res.data;
-            if (data.success) {
-              resolve(data.phoneNumber);
-            } else {
-              reject(res);
-            }
-
-          },
-          fail: function fail(err) {
-            reject(res);
-          } });
-
-      });
-    } } });var _default =
-
-
-
-store;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

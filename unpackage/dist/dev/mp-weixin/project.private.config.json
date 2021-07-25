@@ -53,6 +53,48 @@
           "pathName": "pages/actor/index",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/news/detail",
+          "pathName": "pages/news/detail",
+          "query": "artId=22599",
+          "scene": null
+        },
+        {
+          "name": "pages/actor/detail",
+          "pathName": "pages/actor/detail",
+          "query": "id=undefined",
+          "scene": null
+        },
+        {
+          "name": "pages/actor/detail",
+          "pathName": "pages/actor/detail",
+          "query": "id=14557",
+          "scene": null
+        },
+        {
+          "name": "pages/vod/list",
+          "pathName": "pages/vod/list",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/vod/vod",
+          "pathName": "pages/vod/vod",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/random/random",
+          "pathName": "pages/random/random",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/actor/detail",
+          "pathName": "pages/actor/detail",
+          "query": "id=14556",
+          "scene": null
         }
       ]
     }

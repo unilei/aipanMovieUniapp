@@ -11,7 +11,7 @@
 		type_id: 53
 		type_name: "日韩明星" -->
 		<view class="actor">
-			<view class="actor-item" v-for="(item,index) in actorData" :key="index">
+			<view class="actor-item" v-for="(item,index) in actorData" :key="index" @click="turnActorDetail(item.actor_id)">
 				<view class="actor-pic">
 					<image :src="item.actor_pic" mode="widthFix"></image>
 				</view>
@@ -35,27 +35,42 @@
 		data() {
 			return {
 				actorData:[],
-				actorTypeData:[]
+				actorTypeData:[],
+				page:1
 			}
 		},
 		onLoad() {
-			this.getActorList()
+			this.getActorList(this.page)
 		},
 		methods: {
-			getActorList(){
+			getActorList(page){
 				let data = {
-					ac:'detail',
-					pg:1
+					ac:'list',
+					pg:page
 				}
 				actorApi.actorList(data).then(res=>{
 					if(res.code == 1){
-						this.actorData = res.list;
+						this.actorData = this.actorData.concat(res.list);
 						this.actorTypeData = res.class;
 					}
 				}).catch(err=>{
 					console.log(err)
 				})
+			},
+			turnActorDetail(id){
+				uni.navigateTo({
+					url:'./detail?id='+id
+				})
 			}
+		},
+		onReachBottom() {
+			this.page ++ ;
+			this.getActorList(this.page);
+		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.actorData = [];
+			this.getActorList(this.page);
 		},
 		onShareAppMessage() {
 			
@@ -82,7 +97,7 @@
 	.actor-item{
 		width: 44%;
 		border-radius: 10rpx;
-		background-color: #000000;
+		background-color: #2B2B2B;
 		padding: 10rpx;
 		margin-top: 10rpx;
 		margin-left: 10rpx;

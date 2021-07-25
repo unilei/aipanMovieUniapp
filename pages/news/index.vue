@@ -25,21 +25,22 @@
 		data() {
 			return {
 				artData:[],
-				artTypeData:[]
+				artTypeData:[],
+				page:1
 			}
 		},
 		onLoad() {
 			this.getArtList()
 		},
 		methods: {
-			getArtList(){
+			getArtList(page){
 				let data = {
 					ac:'list',
-					pg:1
+					pg:page
 				}
 				artApi.artList(data).then(res=>{
 					if(res.code == 1){
-						this.artData = res.list;
+						this.artData = this.artData.concat(res.list);
 						this.artTypeData = res.class;
 					}
 				}).catch(err=>{
@@ -51,6 +52,15 @@
 					url:'./detail?artId='+artId
 				})
 			}
+		},
+		onPullDownRefresh() {
+			this.page = 1;
+			this.artData = [];
+			this.getArtList(this.page);
+		},
+		onReachBottom() {
+			this.page++
+			this.getArtList(this.page);
 		},
 		onShareAppMessage() {
 			
@@ -77,7 +87,7 @@
 	}
 	.art-item{
 		width: 42%;
-		background-color: #000000;
+		background-color: #2B2B2B;
 		margin-top: 10rpx;
 		margin-left: 10rpx;
 		padding: 20rpx;

@@ -4,14 +4,18 @@
     "pages/news/index",
     "pages/vod/detail",
     "pages/vod/list",
-    "pages/vod/vod"
+    "pages/vod/vod",
+    "pages/actor/index",
+    "pages/news/detail",
+    "pages/actor/detail",
+    "pages/random/random"
   ],
   "subPackages": [],
   "window": {
     "pageOrientation": "portrait",
     "navigationBarTitleText": "爱盼影视",
     "navigationBarTextStyle": "white",
-    "navigationBarBackgroundColor": "#000000",
+    "navigationBarBackgroundColor": "#141414",
     "backgroundColor": "#F8F8F8",
     "backgroundColorTop": "#F4F5F6",
     "backgroundColorBottom": "#F4F5F6"
@@ -20,7 +24,7 @@
     "color": "#FFFFFF",
     "selectedColor": "#0aa0a8",
     "borderStyle": "black",
-    "backgroundColor": "#000000",
+    "backgroundColor": "#141414",
     "list": [
       {
         "pagePath": "pages/home/index",
@@ -33,6 +37,18 @@
         "iconPath": "static/video.png",
         "selectedIconPath": "static/video-fill.png",
         "text": "视频"
+      },
+      {
+        "pagePath": "pages/actor/index",
+        "iconPath": "static/actor.png",
+        "selectedIconPath": "static/actor-1.png",
+        "text": "演员"
+      },
+      {
+        "pagePath": "pages/news/index",
+        "iconPath": "static/news.png",
+        "selectedIconPath": "static/news-1.png",
+        "text": "资讯"
       }
     ]
   },

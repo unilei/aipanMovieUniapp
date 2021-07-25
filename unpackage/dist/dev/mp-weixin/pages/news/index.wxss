@@ -24,7 +24,7 @@ page{
 }
 .art-item{
 	width: 42%;
-	background-color: #000000;
+	background-color: #2B2B2B;
 	margin-top: 10rpx;
 	margin-left: 10rpx;
 	padding: 20rpx;

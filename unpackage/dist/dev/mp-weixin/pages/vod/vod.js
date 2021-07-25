@@ -175,6 +175,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -213,7 +219,28 @@ var _default =
     // 	}
     // })
   },
-  methods: {} };exports.default = _default;
+  methods: {
+    downloadVideo: function downloadVideo(src) {
+      var downloadTask = uni.downloadFile({
+        url: src, //仅为示例，并非真实的资源
+        success: function success(res) {
+          if (res.statusCode === 200) {
+            console.log('下载成功');
+          }
+        } });
+
+
+      downloadTask.onProgressUpdate(function (res) {
+        console.log('下载进度' + res.progress);
+        console.log('已经下载的数据长度' + res.totalBytesWritten);
+        console.log('预期需要下载的数据总长度' + res.totalBytesExpectedToWrite);
+
+        // 测试条件，取消下载任务。
+        if (res.progress > 50) {
+          downloadTask.abort();
+        }
+      });
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

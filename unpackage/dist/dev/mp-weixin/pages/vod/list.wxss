@@ -4,15 +4,21 @@ page{
 }
 .vod-type-container {
 	margin-top: 10rpx;
-	background-color: #000000;
 }
 .vod-search-container{
-	background-color: #000000;
+	background-color: #141414;
 	margin-top: 10rpx;
 }
-.vod-container {
+/* .vod-container {
 	width: 98%;
 	margin: 20rpx auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+} */
+.vod-container{
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -20,22 +26,36 @@ page{
 	-webkit-box-direction: normal;
 	-webkit-flex-direction: row;
 	        flex-direction: row;
-	-webkit-flex-wrap: wrap;
-	        flex-wrap: wrap;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	        align-items: center;
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 }
-.vod-item {
+.vod-left-container{
+	width: 50%;
+}
+.vod-right-container{
+	width: 50%;
+}
+.vod-item{
+	width: 90%;
+	padding: 2%;
+	margin: 10rpx auto;
+	background-color: #2B2B2B;
+	/* padding: 20rpx 10rpx; */
+	border-radius: 20rpx;
+	-webkit-box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+	        box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+	border: 1rpx solid #808080;
+}
+/* .vod-item {
 	width: 45%;
 	margin: 10rpx auto;
 	background-color: #000000;
 	padding: 20rpx 10rpx;
 	border-radius: 20rpx;
-}
+	box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+	border: 1rpx solid #808080;
+} */
 .vod-img {
 	width: 100%;
 }

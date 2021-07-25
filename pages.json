@@ -13,7 +13,7 @@
 			"path": "pages/news/index",
 			"style": {
 				"navigationBarTitleText": "电影资讯",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": true
 			}
 
 		}, {
@@ -43,15 +43,29 @@
 			"path": "pages/actor/index",
 			"style": {
 				"navigationBarTitleText": "演员列表",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": true
 			}
 
 		}, {
 			"path": "pages/news/detail",
 			"style": {
+				"navigationBarTitleText": "资讯详情",
+				"enablePullDownRefresh": false
+
+			}
+
+		}, {
+			"path": "pages/actor/detail",
+			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
-				
+			}
+
+		}, {
+			"path": "pages/random/random",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
 			}
 
 		}
@@ -60,7 +74,7 @@
 		"pageOrientation": "portrait",
 		"navigationBarTitleText": "爱盼影视",
 		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#000000",
+		"navigationBarBackgroundColor": "#141414",
 		"backgroundColor": "#F8F8F8",
 		"backgroundColorTop": "#F4F5F6",
 		"backgroundColorBottom": "#F4F5F6",
@@ -78,8 +92,9 @@
 		"color": "#FFFFFF",
 		"selectedColor": "#0aa0a8",
 		"borderStyle": "black",
-		"backgroundColor": "#000000",
-		"list": [{
+		"backgroundColor": "#141414",
+		"list": [
+			{
 				"pagePath": "pages/home/index",
 				"iconPath": "static/home.png",
 				"selectedIconPath": "static/home-fill.png",
@@ -93,14 +108,14 @@
 			},
 			{
 				"pagePath": "pages/actor/index",
-				"iconPath": "static/video.png",
-				"selectedIconPath": "static/video-fill.png",
+				"iconPath": "static/actor.png",
+				"selectedIconPath": "static/actor-1.png",
 				"text": "演员"
 			},
 			{
 				"pagePath": "pages/news/index",
-				"iconPath": "static/video.png",
-				"selectedIconPath": "static/video-fill.png",
+				"iconPath": "static/news.png",
+				"selectedIconPath": "static/news-1.png",
 				"text": "资讯"
 			}
 		]

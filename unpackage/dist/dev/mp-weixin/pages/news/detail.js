@@ -93,6 +93,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uParse: function() {
+      return Promise.all(/*! import() | components/u-parse/u-parse */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/u-parse/u-parse")]).then(__webpack_require__.bind(null, /*! @/components/u-parse/u-parse.vue */ 114))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -153,7 +176,16 @@ var _art = _interopRequireDefault(__webpack_require__(/*! @/api/art.js */ 33));f
 //
 //
 //
-var _default = { data: function data() {return { artDetailData: {} };}, onLoad: function onLoad(option) {this.getArtList(option.artId);}, methods: {
+var uParse = function uParse() {Promise.all(/*! require.ensure | components/u-parse/u-parse */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/u-parse/u-parse")]).then((function () {return resolve(__webpack_require__(/*! @/components/u-parse/u-parse.vue */ 114));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { data: function data() {return { artDetailData: {} };}, components: { uParse: uParse }, onLoad: function onLoad(option) {
+    this.getArtList(option.artId);
+  },
+  methods: {
+    preview: function preview(src, e) {
+      // do something
+    },
+    navigate: function navigate(href, e) {
+      // do something
+    },
     getArtList: function getArtList(artId) {var _this = this;
       var data = {
         ids: artId,

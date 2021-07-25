@@ -11,7 +11,8 @@
 		
 		<view v-if="vodDetailList.length>0">
 			<view class="vod-container">
-				<view class="vod-item" v-for="(vod,index) in vodDetailList" :key="index"
+				
+				<!-- <view class="vod-item" v-for="(vod,index) in vodDetailList" :key="index"
 					@click="turnVodDetail(vod.vod_id)">
 					<view class="vod-img">
 						<image :src="vod.vod_pic" mode="widthFix"></image>
@@ -20,20 +21,60 @@
 					<view class="vod-name">
 						{{vod.vod_name}}
 					</view>
+				</view> -->
+				
+				<view class="vod-left-container">
+					<view class="vod-item" v-for="(vod,index) in vodDetailLeftData" :key="index"
+						@click="turnVodDetail(vod.vod_id)">
+						<view class="vod-img">
+							<image :src="vod.vod_pic" mode="widthFix"></image>
+						</view>
+						<view class="vod-remarks">{{vod.vod_remarks}}</view>
+						<view class="vod-name">
+							{{vod.vod_name}}
+						</view>
+					</view>
 				</view>
+				<view class="vod-right-container">
+					<view class="vod-item" v-for="(vod,index) in vodDetailRightData" :key="index"
+						@click="turnVodDetail(vod.vod_id)">
+						<view class="vod-img">
+							<image :src="vod.vod_pic" mode="widthFix"></image>
+						</view>
+						<view class="vod-remarks">{{vod.vod_remarks}}</view>
+						<view class="vod-name">
+							{{vod.vod_name}}
+						</view>
+					</view>
+				</view>
+				
 			</view>
 		</view>
 		<view v-else>
 			<view class="vod-container">
-				<view class="vod-item" v-for="(vod,index) in vodDetailTestList" :key="index" @click="turnVodDetail(vod.vod_id)">
-					<view class="vod-img">
-						<image :src="vod.vod_pic" mode="widthFix"></image>
-					</view>
-					<view class="vod-remarks">{{vod.vod_remarks}}</view>
-					<view class="vod-name">
-						{{vod.vod_name}}
+				<view class="vod-left-container">
+					<view class="vod-item" v-for="(vod,index) in vodDetailTestList" :key="index" @click="turnVodDetail(vod.vod_id)">
+						<view class="vod-img">
+							<image :src="vod.vod_pic" mode="widthFix"></image>
+						</view>
+						<view class="vod-remarks">{{vod.vod_remarks}}</view>
+						<view class="vod-name">
+							{{vod.vod_name}}
+						</view>
 					</view>
 				</view>
+				<view class="vod-right-container">
+					<view class="vod-item" v-for="(vod,index) in vodDetailTestList" :key="index" @click="turnVodDetail(vod.vod_id)">
+						<view class="vod-img">
+							<image :src="vod.vod_pic" mode="widthFix"></image>
+						</view>
+						<view class="vod-remarks">{{vod.vod_remarks}}</view>
+						<view class="vod-name">
+							{{vod.vod_name}}
+						</view>
+					</view>
+				</view>
+				
 			</view>
 		</view>
 		
@@ -55,16 +96,19 @@
 		data() {
 			return {
 				itemStyleDefault: {
-					color: '#808080',
-					background: '#f4f5f6'
+					color: '#000000',
+					background: '#cccccc'
 				},
 				itemStyleActive: {
-					color: '#000000',
-					'border': '1rpx solid #000000;'
+					color: '#ffffff',
+					'border': '1rpx solid #0aa0a8;'
 				},
 				list: [],
 				vodList: [],
 				vodDetailList: [],
+				vodDetailLeftData:[],
+				vodDetailRightData:[],
+				
 				page: 1,
 				lastPage: 0,
 				typeId: 0,
@@ -151,7 +195,21 @@
 					console.log(res)
 					if (res.code == 1) {
 						this.lastPage = res.pagecount;
+						let listData = res.list;
 						let vodDetailData = this.vodDetailList;
+						
+						let leftData = [];
+						let rightData = [];
+						listData.forEach((item,index)=>{
+							if(index%2 == 0){
+								leftData.push(item)
+							}else{
+								rightData.push(item)
+							}
+						})
+						this.vodDetailLeftData = this.vodDetailLeftData.concat(leftData);
+						this.vodDetailRightData = this.vodDetailRightData.concat(rightData);
+						
 						this.vodDetailList = vodDetailData.concat(res.list);
 
 					} else {
@@ -164,6 +222,8 @@
 			vodSearch(e){
 				console.log(e)
 				this.vodDetailList = [];
+				this.vodDetailLeftData=[];
+				this.vodDetailRightData =[];
 				this.page = 1;
 				this.getVodDetailList(this.page,'', e.value)
 			},
@@ -175,6 +235,8 @@
 			vodTypeChange(e) {
 				console.log(e)
 				this.vodDetailList = [];
+				this.vodDetailLeftData=[];
+				this.vodDetailRightData =[];
 				this.page = 1;
 				this.typeId = e.currentItem.type_id;
 				this.getVodDetailList(this.page, e.currentItem.type_id, this.vodName);
@@ -186,6 +248,8 @@
 		},
 		onPullDownRefresh() {
 			this.vodDetailList = [];
+			this.vodDetailLeftData=[];
+			this.vodDetailRightData =[];
 			this.page = 1;
 			this.getVodDetailList(this.page, this.typeId , this.vodName);
 		},
@@ -209,14 +273,13 @@
 	}
 	.vod-type-container {
 		margin-top: 10rpx;
-		background-color: #000000;
 	}
 	.vod-search-container{
-		background-color: #000000;
+		background-color: #141414;
 		margin-top: 10rpx;
 	}
 
-	.vod-container {
+	/* .vod-container {
 		width: 98%;
 		margin: 20rpx auto;
 		display: flex;
@@ -224,15 +287,37 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
+	} */
+	.vod-container{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
-
-	.vod-item {
+	.vod-left-container{
+		width: 50%;
+	}
+	.vod-right-container{
+		width: 50%;
+	}
+	.vod-item{
+		width: 90%;
+		padding: 2%;
+		margin: 10rpx auto;
+		background-color: #2B2B2B;
+		/* padding: 20rpx 10rpx; */
+		border-radius: 20rpx;
+		box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+		border: 1rpx solid #808080;
+	}
+	/* .vod-item {
 		width: 45%;
 		margin: 10rpx auto;
 		background-color: #000000;
 		padding: 20rpx 10rpx;
 		border-radius: 20rpx;
-	}
+		box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+		border: 1rpx solid #808080;
+	} */
 
 	.vod-img {
 		width: 100%;

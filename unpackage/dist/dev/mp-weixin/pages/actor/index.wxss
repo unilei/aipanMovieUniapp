@@ -24,7 +24,7 @@ page{
 .actor-item{
 	width: 44%;
 	border-radius: 10rpx;
-	background-color: #000000;
+	background-color: #2B2B2B;
 	padding: 10rpx;
 	margin-top: 10rpx;
 	margin-left: 10rpx;

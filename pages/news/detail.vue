@@ -2,8 +2,8 @@
 	<view class="container">
 
 		<view class="art">
-			<rich-text :nodes="artDetailData.art_content"></rich-text>
-			<video src="https://vod5.wenshibaowenbei.com/share/QnNcKzJTTuPFAiAD" controls></video>
+			
+			<u-parse :content="artDetailData.art_content"  @preview="preview" @navigate="navigate"></u-parse>
 		</view>
 
 	</view>
@@ -11,17 +11,26 @@
 
 <script>
 	import artApi from '@/api/art.js';
-	
+	import uParse from '@/components/u-parse/u-parse.vue'
 	export default {
 		data() {
 			return {
 				artDetailData: {}
 			}
 		},
+		components: {
+			uParse
+		},
 		onLoad(option) {
 			this.getArtList(option.artId)
 		},
 		methods: {
+			preview(src, e) {
+				// do something
+			},
+			navigate(href, e) {
+				// do something
+			},
 			getArtList(artId) {
 				let data = {
 					ids: artId,
@@ -48,13 +57,18 @@
 </script>
 
 <style>
-	
+	@import url("@/components/u-parse/u-parse.css");
 	page {
 		/* background-color: rgba(0, 0, 0, 0.8); */
 	}
 
 	.art {
-		height: 900rpx;
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	image {
+		width: 100%;
 	}
 
 	.art-item {
