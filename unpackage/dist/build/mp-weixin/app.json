@@ -8,7 +8,9 @@
     "pages/actor/index",
     "pages/news/detail",
     "pages/actor/detail",
-    "pages/random/random"
+    "pages/random/random",
+    "pages/me/index",
+    "pages/vod/apVod"
   ],
   "subPackages": [],
   "window": {

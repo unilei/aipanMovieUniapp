@@ -1,0 +1,1 @@
+<view><block wx:if="{{videoSrc}}"><view class="vod-video"><video id="video" src="{{videoSrc}}" controls="{{true}}" autoplay="{{true}}" page-gesture="{{true}}" play-btn-position="center" enable-play-gesture="{{true}}"></video></view></block></view>

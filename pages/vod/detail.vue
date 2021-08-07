@@ -49,7 +49,8 @@
 				myVodHistoryData: [],
 				myNowVodData: [],
 				showTest: false,
-				showPlayList:false
+				showPlayList:false,
+				vodPlayType:0
 			}
 		},
 		onLoad(option) {
@@ -60,9 +61,21 @@
 			// if (myVodHistoryStr) {
 			// 	this.myVodHistoryData = JSON.parse(myVodHistoryStr);
 			// }
-
+			this.get()
 		},
 		methods: {
+			async get() {
+				return await uniCloud.callFunction({
+					name: 'getPlayType'
+				}).then((res) => {
+					// console.log(res.result.data);
+					let resData = res.result.data;
+					let type = resData[0].type;
+					this.vodPlayType = type;
+				}).catch((err) => {
+					console.error(err)
+				})
+			},
 			showVodPlayList(){
 				this.showPlayList = !this.showPlayList;
 			},
@@ -125,17 +138,24 @@
 			playVideoUrl(vod) {
 				let vodUrl = vod[1];
 				this.videoSrc = vodUrl;
-				let obj ={
-					isLei:1,
-					url:vodUrl
+				
+				if(this.vodPlayType==1){
+					uni.navigateTo({
+						url:'./apVod?source='+vodUrl
+					})
+				}else{
+					let obj ={
+						isLei:1,
+						url:vodUrl
+					}
+					uni.setClipboardData({
+					    data: JSON.stringify(obj),
+					    success: function () {
+					        console.log('success');
+					    }
+					});
 				}
-				console.log(vodUrl)
-				uni.setClipboardData({
-				    data: JSON.stringify(obj),
-				    success: function () {
-				        console.log('success');
-				    }
-				});
+				
 			}
 		},
 		onShareAppMessage() {

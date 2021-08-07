@@ -320,7 +320,8 @@
 	} */
 
 	.vod-img {
-		width: 100%;
+		width: 90%;
+		margin: 0 auto;
 	}
 
 	.vod-img image {

@@ -57,7 +57,8 @@ page{
 	border: 1rpx solid #808080;
 } */
 .vod-img {
-	width: 100%;
+	width: 90%;
+	margin: 0 auto;
 }
 .vod-img image {
 	width: 100%;

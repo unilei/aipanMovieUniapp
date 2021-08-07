@@ -95,6 +95,18 @@
           "pathName": "pages/actor/detail",
           "query": "id=14556",
           "scene": null
+        },
+        {
+          "name": "pages/vod/detail",
+          "pathName": "pages/vod/detail",
+          "query": "vod_id=13373",
+          "scene": null
+        },
+        {
+          "name": "pages/vod/list",
+          "pathName": "pages/vod/list",
+          "query": "",
+          "scene": null
         }
       ]
     }

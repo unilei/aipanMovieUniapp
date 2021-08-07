@@ -57,7 +57,7 @@
 		}, {
 			"path": "pages/actor/detail",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "演员详情",
 				"enablePullDownRefresh": false
 			}
 
@@ -69,7 +69,26 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/me/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/vod/apVod",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "正在播放",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"pageOrientation": "portrait",
 		"navigationBarTitleText": "爱盼影视",
