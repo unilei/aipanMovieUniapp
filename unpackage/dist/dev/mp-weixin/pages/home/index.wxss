@@ -1,6 +1,6 @@
 
-page{
-	background-color: rgba(0,0,0,0.8);
+page {
+	background-color: rgba(0, 0, 0, 0.8);
 }
 .vod-type-container {
 	margin-top: 10rpx;
@@ -27,9 +27,9 @@ page{
 	-webkit-box-pack: justify;
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 }
-.vod-t{
+.vod-t {
 	width: 98%;
 	margin: 0 auto;
 	display: -webkit-box;
@@ -49,11 +49,11 @@ page{
 	border-bottom: 1rpx solid #808080;
 	background-color: #141414;
 }
-.vod-title{
+.vod-title {
 	font-size: 24rpx;
 	color: #D5D5D5;
 }
-.vod-more{
+.vod-more {
 	font-size: 30rpx;
 	color: #D5D5D5;
 }
@@ -72,7 +72,7 @@ page{
 }
 .vod-img image {
 	width: 100%;
-	
+
 	border-radius: 20rpx;
 }
 .vod-remarks {
@@ -82,7 +82,9 @@ page{
 	text-decoration: underline;
 }
 .vod-name {
-	overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	font-size: 18rpx;
 	color: #D5D5D5;
 	font-weight: 700;
@@ -98,15 +100,15 @@ page{
 	bottom: calc(0px + 20px);
 	right: 40rpx;
 }
-.vod-banner-container{
+.vod-banner-container {
 	margin-top: 20rpx;
 }
-.swiper{
-	height:380rpx;
+.swiper {
+	height: 380rpx;
 }
-.banner-item{
+.banner-item {
 	width: 98%;
-	height:380rpx;
+	height: 380rpx;
 	margin: 0 auto;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -123,29 +125,29 @@ page{
 	        justify-content: center;
 	background-color: #141414;
 }
-.banner-l{
+.banner-l {
 	width: 40%;
 }
-.banner-l image{
+.banner-l image {
 	width: 100%;
 }
-.banner-r{
+.banner-r {
 	width: 50%;
 }
-.banner-r-1{
+.banner-r-1 {
 	font-size: 40rpx;
 	color: #D5D5D5;
 	text-align: center;
 	font-weight: 700;
 }
-.banner-r-2{
+.banner-r-2 {
 	font-size: 34rpx;
 	color: #D5D5D5;
 	text-align: center;
 	font-weight: 700;
-	text-decoration:underline;
+	text-decoration: underline;
 }
-.vod-notice-bar{
+.vod-notice-bar {
 	margin-top: 20rpx;
 }
 

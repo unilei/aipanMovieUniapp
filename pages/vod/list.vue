@@ -163,7 +163,7 @@
 							type_name: '全部'
 						})
 						this.list = classData;
-
+						
 					} else {
 						console.log('vod list error:' + JSON.stringify(res.msg))
 					}

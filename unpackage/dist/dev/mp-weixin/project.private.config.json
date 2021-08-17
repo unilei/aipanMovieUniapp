@@ -107,6 +107,36 @@
           "pathName": "pages/vod/list",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/vod/detail",
+          "pathName": "pages/vod/detail",
+          "query": "vod_id=54923",
+          "scene": null
+        },
+        {
+          "name": "pages/me/index",
+          "pathName": "pages/me/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/douban/top",
+          "pathName": "pages/douban/top",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/me/index",
+          "pathName": "pages/me/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/vod/detail",
+          "pathName": "pages/vod/detail",
+          "query": "douban_id=1298624",
+          "scene": null
         }
       ]
     }

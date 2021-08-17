@@ -10,7 +10,9 @@
     "pages/actor/detail",
     "pages/random/random",
     "pages/me/index",
-    "pages/vod/apVod"
+    "pages/vod/apVod",
+    "pages/douban/top",
+    "pages/vod/history"
   ],
   "subPackages": [],
   "window": {
@@ -41,16 +43,22 @@
         "text": "视频"
       },
       {
-        "pagePath": "pages/actor/index",
-        "iconPath": "static/actor.png",
-        "selectedIconPath": "static/actor-1.png",
-        "text": "演员"
+        "pagePath": "pages/douban/top",
+        "iconPath": "static/bangdan-1.png",
+        "selectedIconPath": "static/bangdan-2.png",
+        "text": "榜单"
       },
       {
         "pagePath": "pages/news/index",
         "iconPath": "static/news.png",
         "selectedIconPath": "static/news-1.png",
         "text": "资讯"
+      },
+      {
+        "pagePath": "pages/me/index",
+        "iconPath": "static/account.png",
+        "selectedIconPath": "static/account-fill.png",
+        "text": "我"
       }
     ]
   },
@@ -59,6 +67,5 @@
       "desc": "演示定位能力"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

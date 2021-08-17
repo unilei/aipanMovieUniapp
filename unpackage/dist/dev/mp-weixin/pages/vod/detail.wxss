@@ -1,9 +1,9 @@
 
-page{
-	background-color: rgba(0,0,0,0.8);
+page {
+	background-color: rgba(0, 0, 0, 0.8);
 }
 .vod-container {}
-.vod-t{
+.vod-t {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -22,21 +22,22 @@ page{
 	color: #FFFFFF;
 	margin-top: 10rpx;
 }
-.vod-t-l{
+.vod-t-l {
 	width: 40%;
 }
-.vod-t-l image{
+.vod-t-l image {
 	width: 100%;
 	border-radius: 20rpx;
 }
-.vod-t-r{
+.vod-t-r {
 	padding: 20rpx;
 }
-.vod-actor{
+.vod-actor {
 	margin-top: 10rpx;
 	padding: 20rpx;
 	background-color: #000000;
-	color: #FFFFFF;
+	color: #888888;
+	font-size: 24rpx;
 }
 .vod-video {
 	margin-top: 20rpx;
@@ -48,7 +49,7 @@ page{
 	width: 100%;
 }
 .play-url-container {
-	background-color: rgba(0,0,0,0.9);
+	background-color: rgba(0, 0, 0, 0.9);
 }
 .play-url {
 	width: 100%;
@@ -70,10 +71,37 @@ page{
 	-webkit-justify-content: flex-start;
 	        justify-content: flex-start;
 }
-.play-source-name {
+.play-source{
 	width: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
 	border-bottom: 1rpx solid #EEEEEE;
+	padding: 20rpx;
+}
+.play-source-name {
+	width: 85%;
 	color: #FFFFFF;
+	font-size: 30rpx;
+	font-weight: 700;
+}
+.source-name-icon{
+	width: 15%;
+	text-align: center;
+}
+.play-source-name text{
+	color: #808080;
+	font-size: 24rpx;
 }
 .play-url-item {
 	background-color: #FFFFFF;
@@ -85,9 +113,10 @@ page{
 }
 .vod-content {
 	margin-top: 10rpx;
-	background-color: rgba(0,0,0,0.9);
+	background-color: rgba(0, 0, 0, 0.9);
 	padding: 20rpx;
-	color: #FFFFFF;
+	color: #777777;
+	font-size: 24rpx;
 }
 .active-history {
 	background-color: #EEEEEE;
@@ -95,5 +124,20 @@ page{
 .active {
 	background-color: #000000;
 	color: #FFFFFF;
+}
+.empty-tips{
+	margin-top: 100rpx;
+	font-size: 30rpx;
+	color: #808080;
+	text-align: center;
+}
+.contact{
+	width: 60%;
+	margin: 40rpx  auto;
+}
+.contact button{
+	background-color: rgba(0,0,0,0.6);
+	color: #FFFFFF;
+	font-size: 30rpx;
 }
 
