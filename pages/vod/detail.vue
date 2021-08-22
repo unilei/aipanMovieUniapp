@@ -2,7 +2,7 @@
 	<view class="vod-container">
 		<template v-if="!showEmptyStatus">
 			<view class="vod-t">
-				<view class="vod-t-l" @click="turnVod()">
+				<view class="vod-t-l">
 					<image v-show="vodData.vod_pic" :src="vodData.vod_pic" mode="widthFix"></image>
 				</view>
 				<view class="vod-t-r">
@@ -17,7 +17,7 @@
 				</view>
 			</view>
 			<view class="vod-actor" v-show="vodData.vod_actor">主演：{{vodData.vod_actor}}</view>
-			<view class="play-url-container">
+			<view class="play-url-container" v-if="vodPlayType==1">
 				
 				<view class="play-url" v-for="(item,index) in vodPlayUrlData" :key="index">
 					<view class="play-source"  @click="showVodPlayList(index)">
@@ -27,7 +27,7 @@
 						</view>
 					</view>
 					<block v-if="showPlayList==index">
-						<view class="play-url-item" v-for="(vod,key) in item.data" :key="key" @click="playVideoUrl(vod)">
+						<view class="play-url-item" v-for="(vod,key) in item.data" :key="key" @click="playVideoUrl(vod,item.data,key)">
 							{{vod[0]}}
 						</view>
 					</block>
@@ -173,7 +173,12 @@
 					console.log(err)
 				})
 			},
-			playVideoUrl(vod) {
+			playVideoUrl(vod,playList,vodIndex) {
+				// console.log(vod);
+				// console.log(playList);
+				this.$store.commit('setVideoPlayList',playList);
+				this.$store.commit('setVideoPlayIndex',vodIndex)
+				// return;
 				let vodUrl = vod[1];
 				this.videoSrc = vodUrl;
 				// console.log(this.vodData);
@@ -309,12 +314,13 @@
 	}
 
 	.play-url-item {
-		background-color: #FFFFFF;
+		background-color: #3d3d3d;
 		border: 1rpx solid #000000;
 		padding: 10rpx 20rpx;
 		margin: 10rpx;
 		border-radius: 10rpx;
 		font-size: 28rpx;
+		color: #E0E0E0;
 	}
 
 	.vod-content {

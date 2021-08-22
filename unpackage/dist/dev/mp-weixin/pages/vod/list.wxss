@@ -43,8 +43,7 @@ page{
 	background-color: #2B2B2B;
 	/* padding: 20rpx 10rpx; */
 	border-radius: 20rpx;
-	-webkit-box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
-	        box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+	box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
 	border: 1rpx solid #808080;
 }
 /* .vod-item {

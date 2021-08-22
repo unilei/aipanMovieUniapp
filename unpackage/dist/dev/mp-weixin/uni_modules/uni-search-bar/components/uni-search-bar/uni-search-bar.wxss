@@ -39,8 +39,7 @@
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   overflow: hidden;
   position: relative;
   -webkit-box-flex: 1;

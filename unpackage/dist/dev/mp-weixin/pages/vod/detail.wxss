@@ -104,12 +104,13 @@ page {
 	font-size: 24rpx;
 }
 .play-url-item {
-	background-color: #FFFFFF;
+	background-color: #3d3d3d;
 	border: 1rpx solid #000000;
 	padding: 10rpx 20rpx;
 	margin: 10rpx;
 	border-radius: 10rpx;
 	font-size: 28rpx;
+	color: #E0E0E0;
 }
 .vod-content {
 	margin-top: 10rpx;

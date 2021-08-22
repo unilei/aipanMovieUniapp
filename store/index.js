@@ -17,9 +17,17 @@ const store = new Vuex.Store({
 		leftWinActive: '/pages/component/view/view',
 		activeOpen: '',
 		menu: [],
-		univerifyErrorMsg: ''
+		univerifyErrorMsg: '',
+		videoPlayList:[],
+		videoPlayIndex:0
 	},
 	mutations: {
+		setVideoPlayList(state,data){
+			state.videoPlayList = data;
+		},
+		setVideoPlayIndex(state,index){
+			state.videoPlayIndex = index;
+		},
 		login(state, provider) {
 			state.hasLogin = true;
 			state.loginProvider = provider;
@@ -66,6 +74,20 @@ const store = new Vuex.Store({
 	getters: {
 		currentColor(state) {
 			return state.colorList[state.colorIndex]
+		},
+		nextVod(state){
+			let nextData = {
+				index:state.videoPlayIndex+1,
+				data:state.videoPlayList[state.videoPlayIndex+1]
+			}
+			return nextData;
+		},
+		prevVod(state){
+			let prevData = {
+				index:state.videoPlayIndex-1,
+				data:state.videoPlayList[state.videoPlayIndex-1]
+			}
+			return prevData;
 		}
 	},
 	actions: {

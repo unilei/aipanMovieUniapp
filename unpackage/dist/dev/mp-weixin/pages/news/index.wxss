@@ -30,8 +30,7 @@ page{
 	padding: 20rpx;
 	
 	border: 1rpx solid #808080;
-	-webkit-box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
-	        box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
+	box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
 	border-radius: 10rpx;
 }
 .art-pic{

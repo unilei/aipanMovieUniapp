@@ -67,5 +67,6 @@
       "desc": "演示定位能力"
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }
