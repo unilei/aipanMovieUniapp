@@ -143,6 +143,12 @@
           "pathName": "pages/vod/detail",
           "query": "vod_id=31466",
           "scene": null
+        },
+        {
+          "name": "pages/tv/index",
+          "pathName": "pages/tv/index",
+          "query": "",
+          "scene": null
         }
       ]
     }

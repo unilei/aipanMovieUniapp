@@ -113,6 +113,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -135,6 +139,11 @@ var _default =
     turnHistoryList: function turnHistoryList() {
       uni.navigateTo({
         url: '../vod/history' });
+
+    },
+    turnTvList: function turnTvList() {
+      uni.navigateTo({
+        url: '../tv/index' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

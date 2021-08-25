@@ -12,7 +12,9 @@
     "pages/me/index",
     "pages/vod/apVod",
     "pages/douban/top",
-    "pages/vod/history"
+    "pages/vod/history",
+    "pages/tv/index",
+    "pages/tv/detail"
   ],
   "subPackages": [],
   "window": {
@@ -67,6 +69,5 @@
       "desc": "演示定位能力"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

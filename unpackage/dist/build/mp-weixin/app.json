@@ -12,7 +12,9 @@
     "pages/me/index",
     "pages/vod/apVod",
     "pages/douban/top",
-    "pages/vod/history"
+    "pages/vod/history",
+    "pages/tv/index",
+    "pages/tv/detail"
   ],
   "subPackages": [],
   "window": {

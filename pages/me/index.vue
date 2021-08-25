@@ -8,6 +8,10 @@
 			我的播放记录
 			<uni-icons type="forward" color="#808080"></uni-icons>
 		</view>
+		<view class="me-item" @click="turnTvList()">
+			我的电视直播
+			<uni-icons type="forward" color="#808080"></uni-icons>
+		</view>
 		
 		<view class="contact">
 			<button type="default" open-type="contact">联系我</button>
@@ -37,6 +41,11 @@
 			turnHistoryList(){
 				uni.navigateTo({
 					url:'../vod/history'
+				})
+			},
+			turnTvList(){
+				uni.navigateTo({
+					url:'../tv/index'
 				})
 			}
 		}

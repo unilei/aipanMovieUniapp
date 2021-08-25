@@ -1,0 +1,1 @@
+<view class="container"><block wx:for="{{tvData}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view class="tv-item"><view class="tv-name">{{item.name}}</view><block wx:if="{{item.show==1}}"><view data-event-opts="{{[['tap',[['turnTvDetail',['$0'],[[['tvData','',index,'value']]]]]]]}}" class="tv-play" bindtap="__e">现在播放</view></block></view></block></view>
