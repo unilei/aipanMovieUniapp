@@ -108,10 +108,10 @@ var components
 try {
   components = {
     uniNoticeBar: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar */ "uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar.vue */ 131))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar */ "uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar.vue */ 147))
     },
     uniIcons: function() {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 138))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 154))
     }
   }
 } catch (e) {
@@ -167,6 +167,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -375,22 +386,22 @@ var _douban = _interopRequireDefault(__webpack_require__(/*! @/api/douban.js */ 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = { components: {}, data: function data() {return { list: [], vodList: [], vodDetailList: [], page: 1, lastPage: 0, typeId: 0, vodName: '', vodDetailTestList: _vodData.default.data, vodBannerData: [], vodIndexData: [], vodTypeList: [{ type_id: 'U', type_name: '近期热门' }, { type_id: 'R', type_name: '最新上映' }, { type_id: 'S', type_name: '评分最高' }, { type_id: 'top250', type_name: 'TOP250' }, { type_id: 'T', type_name: '标记最多' }], itemStyleDefault: { color: '#000000', background: '#cccccc' }, itemStyleActive: { color: '#ffffff', 'border': '1rpx solid #0aa0a8;' }, doubanSortValue: 'U', doubanPage: 0, doubanData: [], doubanType: 'tag', showDoubanStatus: false };}, onLoad: function onLoad() {this.getVodBannerlList(1); // 获取最新一天的视频
     this.getIndexVodList(this.page, '', '', '', 24 * 1); // this.getDoubanTags(this.doubanType, this.doubanPage,this.doubanSortValue);
   }, methods: { vodTypeChange: function vodTypeChange(e) {console.log(e);var sortValue = e.currentItem.type_id;this.doubanSortValue = sortValue;this.doubanData = [];this.doubanPage = 0;if (sortValue == 'top250') {this.doubanType = 'top250';} else {this.doubanType = 'tag';}this.getDoubanTags(this.doubanType, this.doubanPage, sortValue);}, vodTypeListShow: function vodTypeListShow(e) {console.log(e);}, getDoubanTags: function getDoubanTags(type, page, sortValue) {var _this = this;var data = { type: type, page: page, sort: sortValue };_douban.default.douban(data).then(function (res) {console.log(res);var douban_data = res.data;if (douban_data) {var doubanData = Object.keys(douban_data).map(function (i) {return douban_data[i];}); // console.log(Object.keys(douban_data).map(function(i){return douban_data[i]}));
-          if (doubanData.length > 0) {_this.showDoubanStatus = true;}_this.doubanData = _this.doubanData.concat(doubanData);} else {}}).catch(function (err) {console.log(err);});}, toTop: function toTop() {
-      uni.pageScrollTo({
-        scrollTop: 0 });
-
-    },
-    turnMoreVod: function turnMoreVod() {
-      uni.switchTab({
-        url: '/pages/vod/list' });
-
-    },
-    // t=>type_id 类型 | ids=>vod_id | h=>vod_time | wd=>vod_name | from=>vod_play_from
-    getIndexVodList: function getIndexVodList(page, t, wd, ids, h, from) {var _this2 = this;
-      var data = {
+          if (doubanData.length > 0) {_this.showDoubanStatus = true;}_this.doubanData = _this.doubanData.concat(doubanData);} else {}}).catch(function (err) {console.log(err);});}, toTop: function toTop() {uni.pageScrollTo({ scrollTop: 0 });}, turnMoreVod: function turnMoreVod() {uni.switchTab({ url: '/pages/vod/list' });}, // t=>type_id 类型 | ids=>vod_id | h=>vod_time | wd=>vod_name | from=>vod_play_from
+    getIndexVodList: function getIndexVodList(page, t, wd, ids, h, from) {var _this2 = this;var data = {
         ac: 'detail',
         pg: page };
 
@@ -448,6 +459,11 @@ var _default = { components: {}, data: function data() {return { list: [], vodLi
     turnDoubanVodDetail: function turnDoubanVodDetail(doubanId) {
       uni.navigateTo({
         url: '/pages/vod/detail?douban_id=' + doubanId });
+
+    },
+    turnWebview: function turnWebview() {
+      uni.navigateTo({
+        url: '../webview/index/index?url=https://h5.unilei.cn' });
 
     } },
 

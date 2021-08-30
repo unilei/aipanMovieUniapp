@@ -124,6 +124,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/webview/index/index",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"pageOrientation": "portrait",
@@ -137,9 +146,7 @@
 			"navigationStyle": "custom"
 		},
 		"h5": {
-			"maxWidth": 1190,
-			"navigationBarTextStyle": "black",
-			"navigationBarBackgroundColor": "#F1F1F1"
+			"maxWidth": 1190
 		}
 
 	},

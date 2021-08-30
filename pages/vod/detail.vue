@@ -17,6 +17,7 @@
 				</view>
 			</view>
 			<view class="vod-actor" v-show="vodData.vod_actor">主演：{{vodData.vod_actor}}</view>
+			<!-- #ifdef MP-WEIXIN -->
 			<view class="play-url-container" v-if="vodPlayType==1">
 				
 				<view class="play-url" v-for="(item,index) in vodPlayUrlData" :key="index">
@@ -33,7 +34,25 @@
 					</block>
 				</view>
 			</view>
-			
+			<!-- #endif -->
+			<!-- #ifdef H5 -->
+			<view class="play-url-container">
+				
+				<view class="play-url" v-for="(item,index) in vodPlayUrlData" :key="index">
+					<view class="play-source"  @click="showVodPlayList(index)">
+						<view class="play-source-name">在线播放： <text>【 播放源 {{item.vod_play_from}} 】</text></view>
+						<view class="source-name-icon" >
+							<uni-icons type="arrowdown" color="#909090"></uni-icons>
+						</view>
+					</view>
+					<block v-if="showPlayList==index">
+						<view class="play-url-item" v-for="(vod,key) in item.data" :key="key" @click="playVideoUrl(vod,item.data,key)">
+							{{vod[0]}}
+						</view>
+					</block>
+				</view>
+			</view>
+			<!-- #endif -->
 			<view class="vod-content">
 				<rich-text :nodes="vodData.vod_content"></rich-text>
 			</view>
@@ -195,7 +214,7 @@
 					historyVodData.unshift(obj)
 				}
 				uni.setStorageSync('historyVodData',historyVodData);
-				
+				// #ifdef MP-WEIXIN
 				if (this.vodPlayType == 1) {
 					uni.navigateTo({
 						url: './apVod?source=' + vodUrl
@@ -212,7 +231,14 @@
 						}
 					});
 				}
-
+				// #endif
+				
+				// #ifdef H5
+				uni.navigateTo({
+					url: './apVod?source=' + vodUrl
+				})
+				// #endif
+				
 			}
 		},
 		onShareAppMessage() {

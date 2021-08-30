@@ -3,6 +3,17 @@
 		<view class="vod-banner-container" v-if="vodBannerData.length>0">
 			<swiper class="swiper" :indicator-dots="false" :autoplay="true" :interval="3000" :duration="500" circular
 				previous-margin="20" next-margin="20">
+				<swiper-item>
+					<view class="swiper-item banner-item" @click="turnWebview()">
+						<view class="banner-l">
+							<image src="https://www.unilei.cn/wp-content/uploads/2021/08/gh_2a42be62ab69_860.jpg" mode="widthFix"></image>
+						</view>
+						<view class="banner-r">
+							<view class="banner-r-1">爱盼影视</view>
+							<view class="banner-r-2">点击查看详情</view>
+						</view>
+					</view>
+				</swiper-item>
 				<swiper-item v-for="(item,index) in vodBannerData" :key="index">
 					<view class="swiper-item banner-item" @click="turnVodDetail(item.vod_id)">
 						<view class="banner-l">
@@ -280,6 +291,11 @@
 			turnDoubanVodDetail(doubanId){
 				uni.navigateTo({
 					url: '/pages/vod/detail?douban_id=' + doubanId
+				})
+			},
+			turnWebview(){
+				uni.navigateTo({
+					url:'../webview/index/index?url=https://h5.unilei.cn'
 				})
 			}
 		},
