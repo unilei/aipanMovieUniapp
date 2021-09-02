@@ -100,7 +100,7 @@
     },
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wx2559b84e4d1a01e7",
+        "appid" : "wx749b14790af7cc24",
         "setting" : {
             "urlCheck" : false
         },
@@ -139,7 +139,7 @@
                 }
             },
             "https" : true,
-			"allowedHosts": ["aipan.unilei.cn"]
+            "allowedHosts" : [ "aipan.unilei.cn" ]
         },
         "sdkConfigs" : {
             "maps" : {

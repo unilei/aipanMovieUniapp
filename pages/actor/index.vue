@@ -19,7 +19,7 @@
 					{{item.actor_name}} {{item.actor_sex}}
 				</view>
 				<view class="type-name">
-					{{item.type_name}} {{item.actor_area}}
+					{{item.actor_area}}
 				</view>
 			</view>
 		</view>

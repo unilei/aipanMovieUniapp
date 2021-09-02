@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "爱盼影视",
+  "navigationBarTitleText": "生活指南Lite",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "uni-notice-bar": "/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar",

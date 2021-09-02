@@ -4,7 +4,7 @@
     "ignore": []
   },
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": true,
     "enhance": true,
     "postcss": true,
@@ -40,7 +40,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wx2559b84e4d1a01e7",
+  "appid": "wx749b14790af7cc24",
   "projectname": "aipan",
   "condition": {
     "search": {

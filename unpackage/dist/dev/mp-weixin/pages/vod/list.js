@@ -96,10 +96,10 @@ var components
 try {
   components = {
     uniSearchBar: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar */ "uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue */ 162))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar */ "uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.vue */ 168))
     },
     vgtTab: function() {
-      return Promise.all(/*! import() | components/vgt-tab/vgt-tab */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vgt-tab/vgt-tab")]).then(__webpack_require__.bind(null, /*! @/components/vgt-tab/vgt-tab.vue */ 169))
+      return Promise.all(/*! import() | components/vgt-tab/vgt-tab */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vgt-tab/vgt-tab")]).then(__webpack_require__.bind(null, /*! @/components/vgt-tab/vgt-tab.vue */ 175))
     }
   }
 } catch (e) {
@@ -331,7 +331,7 @@ var _vodData = _interopRequireDefault(__webpack_require__(/*! @/common/vodData.j
 //
 //
 //
-var vgtTab = function vgtTab() {Promise.all(/*! require.ensure | components/vgt-tab/vgt-tab */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vgt-tab/vgt-tab")]).then((function () {return resolve(__webpack_require__(/*! @/components/vgt-tab/vgt-tab.vue */ 169));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { 'vgt-tab': vgtTab }, data: function data() {return { itemStyleDefault: { color: '#000000', background: '#cccccc' }, itemStyleActive: { color: '#ffffff', 'border': '1rpx solid #0aa0a8;' }, list: [], vodList: [], vodDetailList: [], vodDetailLeftData: [], vodDetailRightData: [], page: 1, lastPage: 0, typeId: 0, vodName: '', vodDetailTestList: _vodData.default.data, searchVodValue: '' };}, onLoad: function onLoad() {this.getVodList(this.page);this.getVodDetailList(this.page, this.typeId, this.vodName);}, methods: { toTop: function toTop() {uni.pageScrollTo({ scrollTop: 0 });}, // t=>type_id 类型 | ids=>vod_id | h=>vod_time | wd=>vod_name | from=>vod_play_from
+var vgtTab = function vgtTab() {Promise.all(/*! require.ensure | components/vgt-tab/vgt-tab */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/vgt-tab/vgt-tab")]).then((function () {return resolve(__webpack_require__(/*! @/components/vgt-tab/vgt-tab.vue */ 175));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { components: { 'vgt-tab': vgtTab }, data: function data() {return { itemStyleDefault: { color: '#000000', background: '#cccccc' }, itemStyleActive: { color: '#ffffff', 'border': '1rpx solid #0aa0a8;' }, list: [], vodList: [], vodDetailList: [], vodDetailLeftData: [], vodDetailRightData: [], page: 1, lastPage: 0, typeId: 0, vodName: '', vodDetailTestList: _vodData.default.data, searchVodValue: '' };}, onLoad: function onLoad() {this.getVodList(this.page);this.getVodDetailList(this.page, this.typeId, this.vodName);}, methods: { toTop: function toTop() {uni.pageScrollTo({ scrollTop: 0 });}, // t=>type_id 类型 | ids=>vod_id | h=>vod_time | wd=>vod_name | from=>vod_play_from
     getVodList: function getVodList(page, t, ids, h, wd, from) {var _this = this;var data = { ac: 'list', pg: page };if (t) {data.t = t;}if (ids) {data.ids = ids;}if (h) {data.h = h;}if (wd) {data.wd = wd;}if (from) {data.from = from;}_vod.default.vodList(data).then(function (res) {console.log(res);if (res.code == 1) {var _page = res.page;var limit = res.limit;var pageCount = res.pagecount;var classData = res.class;classData.unshift({ type_id: 0, type_name: '全部' });_this.list = classData;} else {console.log('vod list error:' + JSON.stringify(res.msg));}}).catch(function (err) {console.log(err);});}, getVodDetailList: function getVodDetailList(page, t, wd, ids, h, from) {var _this2 = this;var data = { ac: 'detail', pg: page };
 
       if (t) {

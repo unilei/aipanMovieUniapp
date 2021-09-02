@@ -4,7 +4,7 @@
 		{
 			"path": "pages/home/index",
 			"style": {
-				"navigationBarTitleText": "爱盼影视",
+				"navigationBarTitleText": "生活指南Lite",
 				"enablePullDownRefresh": true
 			}
 
