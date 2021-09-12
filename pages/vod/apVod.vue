@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view class="vod-video" v-if="videoSrc">
-			<video id="video" :src="videoSrc" controls autoplay page-gesture play-btn-position="center"
+			<video id="myVideo" :src="videoSrc" controls autoplay page-gesture play-btn-position="center"
 			@ended="videoEnd"
 				enable-play-gesture></video>
 		</view>
@@ -51,9 +51,6 @@
 			}
 		},
 		onLoad(option) {
-			console.log(this.nextVod)
-			console.log(this.prevVod)
-			console.log(this.vodPlayList)
 			this.videoSrc = option.source;
 		},
 		methods: {
@@ -100,7 +97,7 @@
 			}
 		},
 		onReady: function(res) {
-			this.videoContext = uni.createVideoContext('video')
+			this.videoContext = uni.createVideoContext('myVideo')
 		},
 	}
 </script>
@@ -109,12 +106,14 @@
 	page {
 		background-color: rgba(0,0,0,0.8);
 	}
-
-	.vod-video {
+	.container{
 		width: 100%;
 	}
-
-	#video {
+	.vod-video {
+		width: 100%;
+		text-align: center;
+	}
+	.vod-video video{
 		width: 100%;
 	}
 	

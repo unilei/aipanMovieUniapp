@@ -15,17 +15,6 @@
 						</view>
 					</view>
 				</swiper-item>
-				<swiper-item>
-					<view class="swiper-item banner-item" @click="turnWebview()">
-						<view class="banner-l">
-							<image src="https://www.unilei.cn/wp-content/uploads/2021/08/gh_2a42be62ab69_860.jpg" mode="widthFix"></image>
-						</view>
-						<view class="banner-r">
-							<view class="banner-r-1">爱盼影视</view>
-							<view class="banner-r-2">点击查看详情</view>
-						</view>
-					</view>
-				</swiper-item>
 			</swiper>
 		</view>
 		<view v-else class="vod-banner-container">
@@ -285,6 +274,8 @@
 				})
 			},
 			turnVodDetail(vodId) {
+				console.log(vodId);
+				
 				uni.navigateTo({
 					url: '/pages/vod/detail?vod_id=' + vodId
 				})
