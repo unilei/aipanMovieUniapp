@@ -15,19 +15,10 @@ page {
 	border: 1rpx solid #808080;
 	box-shadow: 0 0 10rpx 0rpx rgba(255,255,255,0.2);
 	border-radius: 20rpx;
-	display: -webkit-box;
-	display: -webkit-flex;
 	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	        flex-direction: row;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	        align-items: center;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	        justify-content: space-between;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }
 .contact{
 	position: fixed;

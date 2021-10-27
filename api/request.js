@@ -1,7 +1,24 @@
 const request = (config) => {
 	// 处理 apiUrl
 	let api_url = config.url;
-	config.url = 'https://aipan.unilei.cn/api.php/' + api_url;
+	let cmsUrl = uni.getStorageSync('cmsUrl');
+	
+	// #ifdef H5
+	if(cmsUrl){
+		// config.url = cmsUrl + api_url;
+		config.url = '/maccms/'+api_url;
+	}else{
+		config.url = api_url;
+	}
+
+	// #endif
+	// #ifndef H5
+	if(cmsUrl){
+		config.url = cmsUrl + api_url;
+	}else{
+		config.url = api_url;
+	}
+	// #endif
 	
 	if (!config.data) {
 		config.data = {};
@@ -11,7 +28,7 @@ const request = (config) => {
 		
 		uni.request(config).then(responses => {
 			// 异常
-			// console.log(responses)
+			console.log(responses)
 			if (responses[0]) {
 				reject({
 					message: "网络超时"

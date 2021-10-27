@@ -195,7 +195,7 @@
 				uni.setStorageSync('historyVodData',historyVodData);
 				
 				uni.navigateTo({
-					url: './apVod?source=' + vodUrl
+					url: './apVod?source=' + encodeURI(vodUrl) 
 				})
 			}
 		},

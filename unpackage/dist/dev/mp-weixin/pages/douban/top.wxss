@@ -3,19 +3,10 @@ page{
 	background-color:rgba(0,0,0,0.8);
 }
 .top-item{
-	display: -webkit-box;
-	display: -webkit-flex;
 	display: flex;
-	-webkit-box-orient: horizontal;
-	-webkit-box-direction: normal;
-	-webkit-flex-direction: row;
-	        flex-direction: row;
-	-webkit-box-align: center;
-	-webkit-align-items: center;
-	        align-items: center;
-	-webkit-box-pack: justify;
-	-webkit-justify-content: space-between;
-	        justify-content: space-between;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 	margin-top: 20rpx;
 	background-color: #2B2B2B;
 	padding: 20rpx;

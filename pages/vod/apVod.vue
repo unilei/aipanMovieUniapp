@@ -1,8 +1,14 @@
 <template>
 	<view class="container">
 		<view class="vod-video" v-if="videoSrc">
-			<video id="myVideo" :src="videoSrc" controls autoplay page-gesture play-btn-position="center"
+			<video id="myVideo" :src="videoSrc"  
+			:muted="true"
+			play-btn-position="center" 
+			:play-strategy="3"
+			:http-cache="false"
+			codec="hardware"
 			@ended="videoEnd"
+			@error="videoError"
 				enable-play-gesture></video>
 		</view>
 		<view class="video-bs">
@@ -51,30 +57,13 @@
 			}
 		},
 		onLoad(option) {
-			this.videoSrc = option.source;
+			this.videoSrc = decodeURI(option.source) ;
+			console.log(this.videoSrc)
+			console.log(this.vodPlayList)
+			console.log(this.nextVod)
 		},
 		methods: {
-			downloadVideo(src) {
-				const downloadTask = uni.downloadFile({
-					url: src, //仅为示例，并非真实的资源
-					success: (res) => {
-						if (res.statusCode === 200) {
-							console.log('下载成功');
-						}
-					}
-				});
-
-				downloadTask.onProgressUpdate((res) => {
-					console.log('下载进度' + res.progress);
-					console.log('已经下载的数据长度' + res.totalBytesWritten);
-					console.log('预期需要下载的数据总长度' + res.totalBytesExpectedToWrite);
-
-					// 测试条件，取消下载任务。
-					if (res.progress > 50) {
-						downloadTask.abort();
-					}
-				});
-			},
+			
 			beisu(value){
 				console.log(value)
 				this.beisuValue = value;
@@ -94,11 +83,14 @@
 					this.videoSrc = vod.data[1]
 				}
 				
+			},
+			videoError(e){
+				console.log(e)
 			}
 		},
 		onReady: function(res) {
 			this.videoContext = uni.createVideoContext('myVideo')
-		},
+		}
 	}
 </script>
 

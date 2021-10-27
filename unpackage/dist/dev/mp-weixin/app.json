@@ -15,7 +15,8 @@
     "pages/vod/history",
     "pages/tv/index",
     "pages/tv/detail",
-    "pages/webview/index/index"
+    "pages/webview/index/index",
+    "pages/cms/list"
   ],
   "subPackages": [],
   "window": {
@@ -46,22 +47,10 @@
         "text": "视频"
       },
       {
-        "pagePath": "pages/douban/top",
-        "iconPath": "static/bangdan-1.png",
-        "selectedIconPath": "static/bangdan-2.png",
-        "text": "榜单"
-      },
-      {
-        "pagePath": "pages/news/index",
-        "iconPath": "static/news.png",
-        "selectedIconPath": "static/news-1.png",
-        "text": "资讯"
-      },
-      {
         "pagePath": "pages/me/index",
         "iconPath": "static/account.png",
         "selectedIconPath": "static/account-fill.png",
-        "text": "我"
+        "text": "个人中心"
       }
     ]
   },
@@ -70,5 +59,6 @@
       "desc": "演示定位能力"
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

@@ -1,9 +1,13 @@
 <template>
 	<view class="container">
-		<view class="me-item" @click="turnActorList()">
-			演员列表
+		<view class="me-item" @click="turnCmsList()">
+			我的播放源
 			<uni-icons type="forward" color="#808080"></uni-icons>
 		</view>
+		<!-- <view class="me-item" @click="turnActorList()">
+			演员列表
+			<uni-icons type="forward" color="#808080"></uni-icons>
+		</view> -->
 		<view class="me-item" @click="turnHistoryList()">
 			我的播放记录
 			<uni-icons type="forward" color="#808080"></uni-icons>
@@ -47,6 +51,11 @@
 			turnTvList(){
 				uni.navigateTo({
 					url:'../tv/index'
+				})
+			},
+			turnCmsList(){
+				uni.navigateTo({
+					url:'../cms/list'
 				})
 			}
 		}

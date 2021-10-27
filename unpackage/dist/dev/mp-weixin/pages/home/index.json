@@ -1,8 +1,7 @@
 {
-  "navigationBarTitleText": "生活指南Lite",
+  "navigationBarTitleText": "爱盼小站",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "uni-notice-bar": "/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar",
-    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons"
+    "uni-notice-bar": "/uni_modules/uni-notice-bar/components/uni-notice-bar/uni-notice-bar"
   }
 }

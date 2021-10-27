@@ -1,69 +1,28 @@
 <template>
 	<view>
-		<view class="vod-banner-container" v-if="vodBannerData.length>0">
-			<swiper class="swiper" :indicator-dots="false" :autoplay="true" :interval="3000" :duration="500" circular
-				previous-margin="20" next-margin="20">
-				
-				<swiper-item v-for="(item,index) in vodBannerData" :key="index">
-					<view class="swiper-item banner-item" @click="turnVodDetail(item.vod_id)">
-						<view class="banner-l">
-							<image :src="item.vod_pic" mode="widthFix"></image>
+		<template v-if="cmsUrl">
+			<view class="vod-banner-container" v-if="vodBannerData.length>0">
+				<swiper class="swiper" :indicator-dots="false" :autoplay="true" :interval="3000" :duration="500" circular
+					previous-margin="20" next-margin="20">
+					
+					<swiper-item v-for="(item,index) in vodBannerData" :key="index">
+						<view class="swiper-item banner-item" @click="turnVodDetail(item.vod_id)">
+							<view class="banner-l">
+								<image :src="item.vod_pic" mode="widthFix"></image>
+							</view>
+							<view class="banner-r">
+								<view class="banner-r-1">{{item.vod_name}}</view>
+								<view class="banner-r-2">{{item.vod_remarks}}</view>
+							</view>
 						</view>
-						<view class="banner-r">
-							<view class="banner-r-1">{{item.vod_name}}</view>
-							<view class="banner-r-2">{{item.vod_remarks}}</view>
-						</view>
-					</view>
-				</swiper-item>
-			</swiper>
-		</view>
-		<view v-else class="vod-banner-container">
-			<swiper class="swiper" :indicator-dots="false" :autoplay="true" :interval="3000" :duration="500" circular
-				previous-margin="20" next-margin="20">
-				<swiper-item v-for="(item,index) in vodDetailTestList" :key="index">
-					<view class="swiper-item banner-item" @click="turnVodDetail(item.vod_id)">
-						<view class="banner-l">
-							<image :src="item.vod_pic" mode="widthFix"></image>
-						</view>
-						<view class="banner-r">
-							<view class="banner-r-1">{{item.vod_name}}</view>
-							<view class="banner-r-2">{{item.vod_remarks}}</view>
-						</view>
-					</view>
-				</swiper-item>
-			</swiper>
-		</view>
-
-		<view class="vod-notice-bar">
-			<uni-notice-bar v-if="vodBannerData.length>0" showIcon="true" scrollable="true" single="true" :speed="50"
-				backgroundColor="#141414" color="#d5d5d5"
-				text="本站资源均网络搜集，如有关视频侵犯了你的权益，请联系邮箱：1983766950#qq.com(#改为@)，本站将于24小时内删除"></uni-notice-bar>
-			<uni-notice-bar v-else showIcon="true" scrollable="true" single="true" :speed="50" backgroundColor="#141414"
-				color="#d5d5d5" text="爱盼影视"></uni-notice-bar>
-		</view>
-
-		<!-- <view class="vod-type-container" v-if="!showDoubanStatus">
-			<vgt-tab :list="vodTypeList" :itemStyleDefault="itemStyleDefault" :itemStyleActive="itemStyleActive"
-				@onValueChange="vodTypeChange" @onListShow="vodTypeListShow"></vgt-tab>
-		</view> -->
-		<view v-if="showDoubanStatus">
-			<view class="vod-container">
-				<view class="vod-item" v-for="(vod,index) in doubanData" :key="index"
-					@click="turnDoubanVodDetail(vod.id)">
-					<view class="vod-img">
-						<image :src="vod.image" mode="widthFix"></image>
-					</view>
-					<view class="vod-remarks">
-						<uni-icons type="star" size="6" color="#c3d83c"></uni-icons>
-						{{vod.rating}}
-					</view>
-					<view class="vod-name">
-						{{vod.name}}
-					</view>
-				</view>
+					</swiper-item>
+				</swiper>
 			</view>
-		</view>
-		<view v-else-if="!showDoubanStatus">
+			<view class="vod-notice-bar">
+				<uni-notice-bar showIcon="true" scrollable="true" single="true" :speed="50"
+					backgroundColor="#141414" color="#d5d5d5"
+					text="本站资源均网络搜集，如有关视频侵犯了你的权益，请联系邮箱：1983766950#qq.com(#改为@)，本站将于24小时内删除"></uni-notice-bar>
+			</view>
 			<view class="vod-container">
 				<view class="vod-t">
 					<view class="vod-title">最近更新</view>
@@ -80,32 +39,18 @@
 					</view>
 				</view>
 			</view>
-		</view>
-		<view v-else>
-			<view class="vod-container">
-				<view class="vod-item" v-for="(vod,index) in vodDetailTestList" :key="index"
-					@click="turnVodDetail(vod.vod_id)">
-					<view class="vod-img">
-						<image :src="vod.vod_pic" mode="widthFix"></image>
-					</view>
-					<view class="vod-remarks">{{vod.vod_remarks}}</view>
-					<view class="vod-name">
-						{{vod.vod_name}}
-					</view>
-				</view>
+			<view>
+				<image class="totop" @click="toTop" src="@/static/totop.png" mode="widthFix"></image>
 			</view>
-		</view>
-
-		<view>
-			<image class="totop" @click="toTop" src="@/static/totop.png" mode="widthFix"></image>
-		</view>
+		</template>
+		<template v-else>
+			<view>请前往个人中心，选择播放源</view>
+		</template>		
 	</view>
 </template>
 
 <script>
 	import vodApi from '@/api/vod.js';
-	import vodData from '@/common/vodData.js';
-	import doubanApi from '@/api/douban.js';
 
 	export default {
 		components: {
@@ -113,104 +58,32 @@
 		},
 		data() {
 			return {
-				list: [],
-				vodList: [],
-				vodDetailList: [],
 				page: 1,
 				lastPage: 0,
 				typeId: 0,
-				vodName: '',
-				vodDetailTestList: vodData.data,
-
 				vodBannerData: [],
 				vodIndexData: [],
-				vodTypeList: [
-					{
-						type_id: 'U',
-						type_name: '近期热门'
-					},
-					{
-						type_id: 'R',
-						type_name: '最新上映'
-					},
-					{
-						type_id: 'S',
-						type_name: '评分最高'
-					},
-					{
-						type_id: 'top250',
-						type_name: 'TOP250'
-					},
-					{
-						type_id: 'T',
-						type_name: '标记最多'
-					}
-				],
-				itemStyleDefault: {
-					color: '#000000',
-					background: '#cccccc'
-				},
-				itemStyleActive: {
-					color: '#ffffff',
-					'border': '1rpx solid #0aa0a8;'
-				},
-				doubanSortValue:'U',
-				doubanPage:0,
-				doubanData:[],
-				doubanType:'tag',
-				showDoubanStatus:false,
-
 			}
 		},
+		computed:{
+			cmsUrl(){
+				return uni.getStorageSync('cmsUrl')
+			}
+		},
+		onShow() {
+			console.log(this.cmsUrl)
+		},
 		onLoad() {
-
-			this.getVodBannerlList(1)
-			// 获取最新一天的视频
-			this.getIndexVodList(this.page, '', '', '', 24 * 1);
-			// this.getDoubanTags(this.doubanType, this.doubanPage,this.doubanSortValue);
+			console.log(this.cmsUrl)
+			if(this.cmsUrl){
+				this.getVodBannerlList(1)
+				// 获取最新一天的视频
+				this.getIndexVodList(this.page, '', '', '', 24 * 1);
+			}
+			
 		},
 		methods: {
-			vodTypeChange(e) {
-				console.log(e)
-				let sortValue = e.currentItem.type_id;
-				this.doubanSortValue = sortValue;
-				this.doubanData = [];
-				this.doubanPage = 0;
-				if(sortValue == 'top250'){
-					this.doubanType = 'top250';
-				}else{
-					this.doubanType = 'tag'
-				}
-				this.getDoubanTags(this.doubanType,this.doubanPage,sortValue)
-			
-			},
-			vodTypeListShow(e) {
-				console.log(e)
-			},
-			getDoubanTags(type,page,sortValue) {
-				let data = {
-					type: type,
-					page: page,
-					sort: sortValue
-				}
-				doubanApi.douban(data).then(res => {
-					console.log(res)
-					let douban_data = res.data;
-					if(douban_data){
-						let doubanData = Object.keys(douban_data).map(function(i){return douban_data[i]});
-						// console.log(Object.keys(douban_data).map(function(i){return douban_data[i]}));
-						if(doubanData.length>0){
-							this.showDoubanStatus=true;
-						}
-						this.doubanData = this.doubanData.concat(doubanData);
-					}else{
-						
-					}
-					
-				}).catch(err => {
-					console.log(err)
-				})
-			},
+		
 			toTop() {
 				uni.pageScrollTo({
 					scrollTop: 0
@@ -296,10 +169,6 @@
 			this.page = 1;
 			this.getIndexVodList(this.page, '', '', '', 24 * 1);
 			
-			this.doubanData = [];
-			this.doubanPage =0;
-			this.getDoubanTags(this.doubanType,this.doubanPage,this.doubanSortValue);
-			
 			setTimeout(function(){
 				uni.stopPullDownRefresh()
 			},1500)
@@ -308,9 +177,7 @@
 			// console.log('bottom')
 			this.page++;
 			this.getIndexVodList(this.page, '', '', '', 24 * 1);
-			
-			this.doubanPage ++;
-			this.getDoubanTags(this.doubanType,this.doubanPage,this.doubanSortValue);
+		
 		},
 		onShareAppMessage() {
 

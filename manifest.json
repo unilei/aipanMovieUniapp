@@ -19,11 +19,9 @@
             "delay" : 0
         },
         "modules" : {
+            "Webview-x5" : {},
+            "LivePusher" : {},
             "OAuth" : {},
-            "Payment" : {},
-            "Push" : {},
-            "Share" : {},
-            "Speech" : {},
             "VideoPlayer" : {}
         },
         /* 应用发布信息 */
@@ -34,13 +32,10 @@
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
-                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_MOCK_LOCATION\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
-                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
                     "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
                     "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
@@ -64,7 +59,8 @@
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
                     "<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>"
-                ]
+                ],
+                "autoSdkPermissions" : true
             },
             /* ios打包配置 */
             "ios" : {
@@ -76,7 +72,10 @@
                 "speech" : {
                     "ifly" : {}
                 },
-                "ad" : {}
+                "ad" : {},
+                "oauth" : {
+                    "univerify" : {}
+                }
             },
             "orientation" : [ "portrait-primary" ],
             "icons" : {
@@ -133,7 +132,7 @@
     },
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wx749b14790af7cc24",
+        "appid" : "wx255212920847e554",
         "setting" : {
             "urlCheck" : false
         },
@@ -163,7 +162,7 @@
             "disableHostCheck" : true,
             "proxy" : {
                 "/maccms" : {
-                    "target" : "https://aipan.unilei.cn/api.php",
+                    "target" : "https://m3u8.apiyhzy.com/api.php",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
@@ -171,8 +170,7 @@
                     }
                 }
             },
-            "https" : true,
-            "allowedHosts" : [ "aipan.unilei.cn" ]
+            "https" : false
         },
         "sdkConfigs" : {
             "maps" : {
@@ -191,5 +189,6 @@
             }
         },
         "domain" : "h5.unilei.cn"
-    }
+    },
+    "vueVersion" : "2"
 }

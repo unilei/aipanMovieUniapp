@@ -17,12 +17,12 @@
             >{{item.type_name}}</view>
             <view v-if="isUseOpenList" style="width:62rpx;display: inline-block;"></view>
         </scroll-view>
-        <view v-if="isUseOpenList" v-show="!isShowList" class="open-list" @click="handleShowList">
+        <!-- <view v-if="isUseOpenList" v-show="!isShowList" class="open-list" @click="handleShowList">
             <slot name="icon-unfold">
                 <svg t="1606641905404" class="icon-unfold" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2927" width="200" height="200"><path d="M231.424 346.208a32 32 0 0 0-46.848 43.584l297.696 320a32 32 0 0 0 46.4 0.48l310.304-320a32 32 0 1 0-45.952-44.544l-286.848 295.808-274.752-295.36z" p-id="2928" fill="#bfbfbf"></path></svg>
             </slot>
-        </view>
-        <view v-show="isShowList" class="list-wrap bg-fff">
+        </view> -->
+      <!--  <view v-show="isShowList" class="list-wrap bg-fff">
             <slot name="open-list-tit">
                 <view class="flex justify-between border-bottom-solid-ccc">
                     <view class="text-lineheight-lg padding-lr size-28">{{ openListTit }}</view>
@@ -47,7 +47,7 @@
                     @click="onClickListItem(index, $event)"
                 >{{item.type_name}}</view>
             </view>
-        </view>
+        </view> -->
     </view>
 </template>
 
