@@ -9,8 +9,8 @@
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 5);
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _apVod = _interopRequireDefault(__webpack_require__(/*! ./pages/vod/apVod.vue */ 105));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 3));
+var _apVod = _interopRequireDefault(__webpack_require__(/*! ./pages/vod/apVod.vue */ 105));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 createPage(_apVod.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
@@ -158,6 +158,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -183,30 +189,13 @@ var _default =
     } },
 
   onLoad: function onLoad(option) {
-    this.videoSrc = decodeURIComponent(option.source);
+    this.videoSrc = decodeURI(option.source);
+    console.log(this.videoSrc);
+    console.log(this.vodPlayList);
+    console.log(this.nextVod);
   },
   methods: {
-    downloadVideo: function downloadVideo(src) {
-      var downloadTask = uni.downloadFile({
-        url: src, //仅为示例，并非真实的资源
-        success: function success(res) {
-          if (res.statusCode === 200) {
-            console.log('下载成功');
-          }
-        } });
 
-
-      downloadTask.onProgressUpdate(function (res) {
-        console.log('下载进度' + res.progress);
-        console.log('已经下载的数据长度' + res.totalBytesWritten);
-        console.log('预期需要下载的数据总长度' + res.totalBytesExpectedToWrite);
-
-        // 测试条件，取消下载任务。
-        if (res.progress > 50) {
-          downloadTask.abort();
-        }
-      });
-    },
     beisu: function beisu(value) {
       console.log(value);
       this.beisuValue = value;
@@ -226,6 +215,9 @@ var _default =
         this.videoSrc = vod.data[1];
       }
 
+    },
+    videoError: function videoError(e) {
+      console.log(e);
     } },
 
   onReady: function onReady(res) {
