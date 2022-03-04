@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "资讯详情",
-  "enablePullDownRefresh": false,
-  "usingComponents": {
-    "u-parse": "/components/u-parse/u-parse"
-  }
-}

@@ -1,1 +1,0 @@
-<view class="container"><view class="art"><u-parse vue-id="cf0f8e3c-1" content="{{artDetailData.art_content}}" data-event-opts="{{[['^preview',[['preview']]],['^navigate',[['navigate']]]]}}" bind:preview="__e" bind:navigate="__e" bind:__l="__l"></u-parse></view></view>

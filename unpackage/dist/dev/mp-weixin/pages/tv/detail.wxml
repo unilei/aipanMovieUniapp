@@ -1,1 +1,0 @@
-<view class="container"><video id="tvVideo" show-loading="{{true}}" src="{{srcUrl}}" controls="{{true}}" autoplay="{{true}}"></video></view>
